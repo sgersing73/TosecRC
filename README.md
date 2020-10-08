@@ -1,2 +1,2 @@
 # TosecRC
-TOSEC rom collect and management system
+TOSEC rom collect and management system - will coming soon...
