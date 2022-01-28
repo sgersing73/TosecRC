@@ -1,0 +1,6 @@
+
+Name: Qt5WebKit
+Version: 5.602.3
+Libs: -Lc:/Users/qt/work/install/lib -lQt5WebKit
+Cflags: -Ic:/Users/qt/work/install/include/Qt5WebKit 
+Requires: Qt5Core Qt5Gui Qt5Network
