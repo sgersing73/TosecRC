@@ -1,0 +1,1530 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1575</width>
+    <height>665</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>TOSEC Rom Center (Homage)</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="tosec.qrc">
+    <normaloff>:/program/icon/images/Mcdo-Design-Cats-2-Dot-Mac-Logo.ico</normaloff>:/program/icon/images/Mcdo-Design-Cats-2-Dot-Mac-Logo.ico</iconset>
+  </property>
+  <property name="animated">
+   <bool>true</bool>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <widget class="QSplitter" name="splitter_4">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
+      </property>
+      <widget class="QSplitter" name="splitter_3">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+       <widget class="QWidget" name="layoutWidget">
+        <layout class="QGridLayout" name="gridLayout_5">
+         <item row="1" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_7">
+           <item>
+            <widget class="QCheckBox" name="chkLoadAll">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="toolTip">
+              <string>Show only valid rom entries</string>
+             </property>
+             <property name="text">
+              <string>load all</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="cboSystems">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QPushButton" name="cmdSystemEdit">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="text">
+              <string/>
+             </property>
+             <property name="icon">
+              <iconset resource="tosec.qrc">
+               <normaloff>:/icon/toolbar/blue/images/toolbar/blue/setttings.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/setttings.ico</iconset>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="4" column="0">
+          <widget class="TosecView" name="widTosec" native="true"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lblLogo">
+           <property name="maximumSize">
+            <size>
+             <width>16777215</width>
+             <height>40</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>Logo</string>
+           </property>
+           <property name="scaledContents">
+            <bool>false</bool>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QSplitter" name="splitter_2">
+           <property name="orientation">
+            <enum>Qt::Vertical</enum>
+           </property>
+           <widget class="QWidget" name="layoutWidget">
+            <layout class="QHBoxLayout" name="horizontalLayout_5">
+             <property name="spacing">
+              <number>6</number>
+             </property>
+             <item>
+              <widget class="QCheckBox" name="chkTailLog">
+               <property name="text">
+                <string>Tail Logfile</string>
+               </property>
+               <property name="tristate">
+                <bool>true</bool>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="chkSys">
+               <property name="text">
+                <string>System</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="chkWikiInfo">
+               <property name="text">
+                <string>Wiki</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QCheckBox" name="chkTosec">
+               <property name="text">
+                <string>Tosec</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="horizontalSpacer">
+               <property name="orientation">
+                <enum>Qt::Horizontal</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>40</width>
+                 <height>20</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QPushButton" name="cmdPortrait">
+               <property name="text">
+                <string>Portrait</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="cmdPCB">
+               <property name="text">
+                <string>PCB</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QSplitter" name="splitter">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <widget class="QListWidget" name="listWidget">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="MinimumExpanding" vsizetype="Expanding">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="minimumSize">
+              <size>
+               <width>0</width>
+               <height>100</height>
+              </size>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="font">
+              <font>
+               <pointsize>11</pointsize>
+              </font>
+             </property>
+            </widget>
+            <widget class="QGroupBox" name="grpBrowser">
+             <property name="title">
+              <string/>
+             </property>
+             <property name="flat">
+              <bool>false</bool>
+             </property>
+             <property name="checkable">
+              <bool>false</bool>
+             </property>
+             <layout class="QGridLayout" name="gridLayout_2">
+              <item row="0" column="0">
+               <layout class="QVBoxLayout" name="verticalLayout">
+                <item>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <item>
+                   <widget class="QPushButton" name="cmdLink1">
+                    <property name="text">
+                     <string>Link 1</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="cmdLink2">
+                    <property name="text">
+                     <string>Link 2</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="cmdLink3">
+                    <property name="text">
+                     <string>Link 3</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QPushButton" name="cmdLink4">
+                    <property name="text">
+                     <string>Link 4</string>
+                    </property>
+                   </widget>
+                  </item>
+                 </layout>
+                </item>
+                <item>
+                 <widget class="QLineEdit" name="edtBrowserUrl"/>
+                </item>
+                <item>
+                 <widget class="QComboBox" name="cboHtmlLinks"/>
+                </item>
+                <item>
+                 <widget class="QWebView" name="webView" native="true">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="maximumSize">
+                   <size>
+                    <width>16777215</width>
+                    <height>16777215</height>
+                   </size>
+                  </property>
+                  <property name="font">
+                   <font>
+                    <family>Tahoma</family>
+                    <pointsize>10</pointsize>
+                   </font>
+                  </property>
+                  <property name="url" stdset="0">
+                   <url>
+                    <string>about:blank</string>
+                   </url>
+                  </property>
+                  <property name="zoomFactor" stdset="0">
+                   <double>0.800000011920929</double>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+              <item row="1" column="0">
+               <layout class="QHBoxLayout" name="horizontalLayout_11">
+                <item>
+                 <widget class="QPushButton" name="cmdBrowserBack">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>1</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>:/icon/player/blue/images/player/blue/backward.ico</normaloff>:/icon/player/blue/images/player/blue/backward.ico</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="cmdBrowserForward">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="minimumSize">
+                   <size>
+                    <width>1</width>
+                    <height>0</height>
+                   </size>
+                  </property>
+                  <property name="text">
+                   <string/>
+                  </property>
+                  <property name="icon">
+                   <iconset>
+                    <normaloff>:/icon/player/blue/images/player/blue/forward.ico</normaloff>:/icon/player/blue/images/player/blue/forward.ico</iconset>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <spacer name="horizontalSpacer_3">
+                  <property name="orientation">
+                   <enum>Qt::Horizontal</enum>
+                  </property>
+                  <property name="sizeHint" stdset="0">
+                   <size>
+                    <width>40</width>
+                    <height>20</height>
+                   </size>
+                  </property>
+                 </spacer>
+                </item>
+                <item>
+                 <widget class="QProgressBar" name="prgWebViewLoading">
+                  <property name="value">
+                   <number>24</number>
+                  </property>
+                  <property name="textVisible">
+                   <bool>true</bool>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QCheckBox" name="chkWebViewLocked">
+                  <property name="sizePolicy">
+                   <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+                    <horstretch>0</horstretch>
+                    <verstretch>0</verstretch>
+                   </sizepolicy>
+                  </property>
+                  <property name="text">
+                   <string>Browserlock</string>
+                  </property>
+                 </widget>
+                </item>
+               </layout>
+              </item>
+             </layout>
+            </widget>
+           </widget>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="Performance" name="widPerformance" native="true"/>
+         </item>
+        </layout>
+       </widget>
+       <widget class="QWidget" name="layoutWidget1">
+        <layout class="QGridLayout" name="gridLayout_3">
+         <item row="6" column="0">
+          <layout class="QHBoxLayout" name="horizontalLayout_3">
+           <item>
+            <widget class="QLabel" name="lblImage1">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>150</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Screen shot 1</string>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QLabel" name="lblImage2">
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>150</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>Screen shot 2</string>
+             </property>
+             <property name="scaledContents">
+              <bool>false</bool>
+             </property>
+             <property name="alignment">
+              <set>Qt::AlignCenter</set>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item row="3" column="0">
+          <widget class="QTableWidget" name="tableWidgetInfo">
+           <property name="font">
+            <font>
+             <pointsize>11</pointsize>
+             <weight>50</weight>
+             <bold>false</bold>
+             <stylestrategy>PreferAntialias</stylestrategy>
+             <kerning>false</kerning>
+            </font>
+           </property>
+           <property name="autoFillBackground">
+            <bool>false</bool>
+           </property>
+           <property name="sizeAdjustPolicy">
+            <enum>QAbstractScrollArea::AdjustToContentsOnFirstShow</enum>
+           </property>
+           <property name="selectionMode">
+            <enum>QAbstractItemView::ExtendedSelection</enum>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QGroupBox" name="gpSelection">
+           <property name="minimumSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="sizeIncrement">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="baseSize">
+            <size>
+             <width>0</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="title">
+            <string/>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+           <property name="flat">
+            <bool>false</bool>
+           </property>
+           <layout class="QGridLayout" name="gridLayout_7">
+            <property name="leftMargin">
+             <number>2</number>
+            </property>
+            <property name="topMargin">
+             <number>2</number>
+            </property>
+            <property name="rightMargin">
+             <number>2</number>
+            </property>
+            <property name="bottomMargin">
+             <number>2</number>
+            </property>
+            <item row="1" column="0">
+             <widget class="QLineEdit" name="edtSearch"/>
+            </item>
+            <item row="0" column="0">
+             <layout class="QGridLayout" name="gridLayout">
+              <item row="0" column="4">
+               <widget class="QPushButton" name="cmdJR">
+                <property name="text">
+                 <string>J-R</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="2">
+               <widget class="QPushButton" name="cmd09">
+                <property name="maximumSize">
+                 <size>
+                  <width>16777215</width>
+                  <height>16777215</height>
+                 </size>
+                </property>
+                <property name="text">
+                 <string>0-9</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="5">
+               <widget class="QPushButton" name="cmdSZ">
+                <property name="text">
+                 <string>S-Z</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="1">
+               <widget class="QPushButton" name="cmdAll">
+                <property name="text">
+                 <string>all</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="3">
+               <widget class="QPushButton" name="cmdAI">
+                <property name="text">
+                 <string>A-I</string>
+                </property>
+               </widget>
+              </item>
+              <item row="0" column="6">
+               <widget class="QPushButton" name="cmdFavorite">
+                <property name="text">
+                 <string/>
+                </property>
+                <property name="icon">
+                 <iconset resource="tosec.qrc">
+                  <normaloff>:/icon/farious/blue/images/farious/blue/star.ico</normaloff>:/icon/farious/blue/images/farious/blue/star.ico</iconset>
+                </property>
+                <property name="iconSize">
+                 <size>
+                  <width>13</width>
+                  <height>13</height>
+                 </size>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="3" column="0">
+             <layout class="QHBoxLayout" name="horizontalLayout">
+              <item>
+               <widget class="QCheckBox" name="chkOnlyValid">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>only valid roms</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkOnlyCue">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>only cue</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkSystemSearch">
+                <property name="sizePolicy">
+                 <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                  <horstretch>0</horstretch>
+                  <verstretch>0</verstretch>
+                 </sizepolicy>
+                </property>
+                <property name="text">
+                 <string>system search</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkGamebase">
+                <property name="text">
+                 <string>gamebase roms</string>
+                </property>
+               </widget>
+              </item>
+             </layout>
+            </item>
+            <item row="4" column="0">
+             <widget class="QLabel" name="lblAnzRomInfo">
+              <property name="text">
+               <string>no roms loaded...</string>
+              </property>
+              <property name="alignment">
+               <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="Gamebase" name="widGamebase" native="true"/>
+         </item>
+        </layout>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="layoutWidget">
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="10" column="0">
+         <widget class="SidPlayer" name="widSidPlayer" native="true"/>
+        </item>
+        <item row="7" column="0">
+         <widget class="Musik" name="widMP3" native="true"/>
+        </item>
+        <item row="9" column="0">
+         <widget class="TheModArchive" name="widTheModArchive" native="true"/>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QLabel" name="lblPublisher">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Publisher Logo</string>
+            </property>
+            <property name="scaledContents">
+             <bool>false</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblDeveloper">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>50</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Developer Logo</string>
+            </property>
+            <property name="scaledContents">
+             <bool>false</bool>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="5" column="0">
+         <widget class="QTableWidget" name="tableWidget">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>8</pointsize>
+            <weight>50</weight>
+            <bold>false</bold>
+           </font>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustToContents</enum>
+          </property>
+          <property name="autoScroll">
+           <bool>true</bool>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QPushButton" name="cmdShowFile">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>show image in default viewer</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="tosec.qrc">
+              <normaloff>:/icon/farious/blue/images/farious/blue/presentation.ico</normaloff>:/icon/farious/blue/images/farious/blue/presentation.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdUpload">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="tosec.qrc">
+              <normaloff>:/icon/farious/blue/images/farious/blue/upload.ico</normaloff>:/icon/farious/blue/images/farious/blue/upload.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdTheGamesDB">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>query TheGamesDB</string>
+            </property>
+            <property name="icon">
+             <iconset resource="tosec.qrc">
+              <normaloff>:/icon/farious/blue/images/farious/blue/image.ico</normaloff>:/icon/farious/blue/images/farious/blue/image.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdExtract">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>save image to disk</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="tosec.qrc">
+              <normaloff>:/icon/farious/blue/images/farious/blue/usbstick.ico</normaloff>:/icon/farious/blue/images/farious/blue/usbstick.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdStartEmu">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>start emulation</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="tosec.qrc">
+              <normaloff>:/icon/farious/blue/images/farious/blue/game.ico</normaloff>:/icon/farious/blue/images/farious/blue/game.ico</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QCheckBox" name="chkFullscreen">
+            <property name="text">
+             <string>Fullscreen</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="edtSystems">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="toolTip">
+             <string>edit startup files</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="tosec.qrc">
+              <normaloff>:/icon/toolbar/blue/images/toolbar/blue/setttings.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/setttings.ico</iconset>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="11" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLabel" name="lblCover">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Cover</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QLabel" name="lblMedia">
+            <property name="maximumSize">
+             <size>
+              <width>16777215</width>
+              <height>150</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>Media</string>
+            </property>
+            <property name="alignment">
+             <set>Qt::AlignCenter</set>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="8" column="0">
+         <widget class="AmigaRemix" name="widAmigaRemix" native="true"/>
+        </item>
+        <item row="6" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QPushButton" name="cmdSolution">
+            <property name="text">
+             <string>Solution</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdCodeTable">
+            <property name="text">
+             <string>Codetable</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdManuals">
+            <property name="text">
+             <string>Manual</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdSoundtrack">
+            <property name="text">
+             <string>Soundtrack</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="cmdYoutubeVideo">
+            <property name="text">
+             <string>Video</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="4" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout_9"/>
+        </item>
+        <item row="1" column="0">
+         <widget class="QComboBox" name="cboStartups">
+          <property name="sizePolicy">
+           <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+           </sizepolicy>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QComboBox::AdjustToContents</enum>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QTextEdit" name="edtLogFile">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>16777215</width>
+        <height>100</height>
+       </size>
+      </property>
+      <property name="frameShape">
+       <enum>QFrame::Box</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1575</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuDatei">
+    <property name="title">
+     <string>Datei</string>
+    </property>
+    <addaction name="actionView_Log_File"/>
+    <addaction name="separator"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuDatenbank">
+    <property name="title">
+     <string>Database</string>
+    </property>
+    <addaction name="actionRead_DAT_XML_file"/>
+    <addaction name="actionRead_directroy_of_DAT_XML_files"/>
+    <addaction name="separator"/>
+    <addaction name="actionScan_for_new_roms"/>
+    <addaction name="actionSystem_Overview"/>
+    <addaction name="separator"/>
+    <addaction name="actionDelete_database"/>
+    <addaction name="actionUpdate_rom_storage"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionSqliteBrowser3"/>
+    <addaction name="actionGamebase"/>
+   </widget>
+   <widget class="QMenu" name="menuMusik">
+    <property name="title">
+     <string>Multimedia</string>
+    </property>
+    <addaction name="actionAmigaRemix"/>
+    <addaction name="actionToggle_SID_Player"/>
+    <addaction name="actionThe_Mod_Archive"/>
+    <addaction name="actionAmigaFutureOnlineMag"/>
+   </widget>
+   <addaction name="menuDatei"/>
+   <addaction name="menuDatenbank"/>
+   <addaction name="menuTools"/>
+   <addaction name="menuMusik"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="windowTitle">
+    <string>Toolbar Funktionen</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionExit"/>
+   <addaction name="actionRead_directroy_of_DAT_XML_files"/>
+   <addaction name="actionScan_for_new_roms"/>
+   <addaction name="actionVerifyRomStore"/>
+   <addaction name="actionSystem_Overview"/>
+   <addaction name="actionDownload"/>
+   <addaction name="actionSettings"/>
+   <addaction name="separator"/>
+   <addaction name="actionMakeAESKey"/>
+   <addaction name="actionLockStorage"/>
+   <addaction name="actionUnlockStorage"/>
+   <addaction name="separator"/>
+   <addaction name="actionSQLBrowser"/>
+   <addaction name="actionDropbox"/>
+   <addaction name="actionPDFViewer"/>
+   <addaction name="separator"/>
+  </widget>
+  <widget class="QToolBar" name="toolBarSystems">
+   <property name="windowTitle">
+    <string>Toolbar Systems</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolBarLinks">
+   <property name="windowTitle">
+    <string>Toolbar Hyperlinks</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>true</bool>
+   </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolBarYoutube">
+   <property name="windowTitle">
+    <string>Toolbar Youtube</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolHomeComputersDigital">
+   <property name="windowTitle">
+    <string>Toolbar HomeComputers</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <widget class="QToolBar" name="toolNews">
+   <property name="windowTitle">
+    <string>Toolbar Newsticker</string>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+  </widget>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/exit.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/exit.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionRead_DAT_XML_file">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/files.ico</normaloff>:/icon/farious/blue/images/farious/blue/files.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import a DAT File</string>
+   </property>
+   <property name="toolTip">
+    <string>Import a TOSEC DAT File</string>
+   </property>
+  </action>
+  <action name="actionRead_directroy_of_DAT_XML_files">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/files.ico</normaloff>:/icon/farious/blue/images/farious/blue/files.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Import DAT Files</string>
+   </property>
+  </action>
+  <action name="actionScan_for_new_roms">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/search.ico</normaloff>:/icon/farious/blue/images/farious/blue/search.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Rom scan</string>
+   </property>
+  </action>
+  <action name="actionDelete_database">
+   <property name="text">
+    <string>Delete Database</string>
+   </property>
+  </action>
+  <action name="actionToggle_SID_Player">
+   <property name="text">
+    <string>SID/AY Player</string>
+   </property>
+   <property name="toolTip">
+    <string>show/hide SID Player</string>
+   </property>
+  </action>
+  <action name="actionUpdate_rom_storage">
+   <property name="text">
+    <string>Update Rom Storage</string>
+   </property>
+  </action>
+  <action name="actionAmigaRemix">
+   <property name="text">
+    <string>AmigaRemix</string>
+   </property>
+  </action>
+  <action name="actionFlashtro">
+   <property name="text">
+    <string>Flashtro</string>
+   </property>
+  </action>
+  <action name="actionSettings">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/setttings.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/setttings.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Settings</string>
+   </property>
+  </action>
+  <action name="actionVerifyRomStore">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/verify.ico</normaloff>:/icon/farious/blue/images/farious/blue/verify.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Verify Rom Store</string>
+   </property>
+  </action>
+  <action name="actionSystem_Overview">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/systems.ico</normaloff>:/icon/farious/blue/images/farious/blue/systems.ico</iconset>
+   </property>
+   <property name="text">
+    <string>System Overview</string>
+   </property>
+  </action>
+  <action name="actionThe_Mod_Archive">
+   <property name="text">
+    <string>The Mod Archive</string>
+   </property>
+  </action>
+  <action name="actionDownload">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/download.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/download.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Download</string>
+   </property>
+   <property name="toolTip">
+    <string>Downloader</string>
+   </property>
+  </action>
+  <action name="actionSqliteBrowser3">
+   <property name="text">
+    <string>SqliteBrowser3</string>
+   </property>
+  </action>
+  <action name="actionGamebase">
+   <property name="text">
+    <string>Gamebase</string>
+   </property>
+  </action>
+  <action name="actionLockStorage">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/lock.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/lock.ico</iconset>
+   </property>
+   <property name="text">
+    <string>LockStorage</string>
+   </property>
+  </action>
+  <action name="actionUnlockStorage">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/unlock.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/unlock.ico</iconset>
+   </property>
+   <property name="text">
+    <string>UnlockStorage</string>
+   </property>
+  </action>
+  <action name="actionMakeAESKey">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/shield.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/shield.ico</iconset>
+   </property>
+   <property name="text">
+    <string>makeAESKey</string>
+   </property>
+  </action>
+  <action name="actionDropbox">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/toolbar/blue/images/toolbar/blue/1471905738_Dropbox.ico</normaloff>:/icon/toolbar/blue/images/toolbar/blue/1471905738_Dropbox.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Dropbox</string>
+   </property>
+  </action>
+  <action name="actionPDFViewer">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/quill.ico</normaloff>:/icon/farious/blue/images/farious/blue/quill.ico</iconset>
+   </property>
+   <property name="text">
+    <string>PDFViewer</string>
+   </property>
+   <property name="toolTip">
+    <string>PDF Viewer</string>
+   </property>
+  </action>
+  <action name="actionSQLBrowser">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/database.ico</normaloff>:/icon/farious/blue/images/farious/blue/database.ico</iconset>
+   </property>
+   <property name="text">
+    <string>SQLBrowser</string>
+   </property>
+   <property name="toolTip">
+    <string>SQLBrowser</string>
+   </property>
+  </action>
+  <action name="actionAmigaFutureOnlineMag">
+   <property name="icon">
+    <iconset resource="tosec.qrc">
+     <normaloff>:/icon/farious/blue/images/farious/blue/gift.ico</normaloff>:/icon/farious/blue/images/farious/blue/gift.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Amiga Future (Online Mag.)</string>
+   </property>
+  </action>
+  <action name="actionView_Log_File">
+   <property name="text">
+    <string>View Log-File</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKitWidgets/QWebView</header>
+  </customwidget>
+  <customwidget>
+   <class>Musik</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/Musik/musik.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Gamebase</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/Gamebase/gamebase.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>SidPlayer</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/SidPlayer/sidplayer.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AmigaRemix</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/AmigaRemix/amigaremix.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>Performance</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/Performance/performance.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TheModArchive</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/TheModArchive/themodarchive.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>TosecView</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/TosecView/tosecview.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="tosec.qrc"/>
+ </resources>
+ <connections>
+  <connection>
+   <sender>actionExit</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>quit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionRead_DAT_XML_file</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>importDatFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionRead_directroy_of_DAT_XML_files</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>importDatFileDir()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>197</x>
+     <y>150</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDelete_database</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>deleteDatabase()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>307</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionScan_for_new_roms</sender>
+   <signal>triggered()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>scanRoms()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>307</x>
+     <y>148</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolBarSystems</sender>
+   <signal>actionTriggered(QAction*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>handleToolBarSystem(QAction*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1322</x>
+     <y>51</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>471</x>
+     <y>276</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolBarLinks</sender>
+   <signal>actionTriggered(QAction*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>handleToolBarLinks(QAction*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>9</x>
+     <y>65</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>3</x>
+     <y>201</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolBarYoutube</sender>
+   <signal>actionTriggered(QAction*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>handleToolBarYoutube(QAction*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>23</x>
+     <y>66</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>542</x>
+     <y>348</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolHomeComputersDigital</sender>
+   <signal>actionTriggered(QAction*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>handleToolBarHomeComputersDigital(QAction*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>35</x>
+     <y>66</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>690</x>
+     <y>363</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>toolNews</sender>
+   <signal>actionTriggered(QAction*)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>handleToolBarNews(QAction*)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>805</x>
+     <y>60</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>787</x>
+     <y>332</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>getCRC32()</slot>
+  <slot>importDatFile()</slot>
+  <slot>importDatFileDir()</slot>
+  <slot>quit()</slot>
+  <slot>deleteDatabase()</slot>
+  <slot>scanRoms()</slot>
+  <slot>handleToolBarSystem(QAction*)</slot>
+  <slot>handleToolBarLinks(QAction*)</slot>
+  <slot>handleToolBarYoutube(QAction*)</slot>
+  <slot>LockStorage()</slot>
+  <slot>UnlockStorage()</slot>
+  <slot>handleToolBarHomeComputersDigital(QAction*)</slot>
+  <slot>handleToolBarNews(QAction*)</slot>
+ </slots>
+</ui>

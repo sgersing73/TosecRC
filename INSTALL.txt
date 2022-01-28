@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Ziel-Verzeichniss anlegen und Benutzerrechte vergeben
+
+sudo mkdir /tosec
+sudo chgrp users /tosec
+sudo chmod 775 /tosec
+sudo usermod -a -G users $USER
+
+sudo apt install git cmake subversion
+sudo apt install qtcreator qt5-default qttools5-dev-tools qt5-doc qtmultimedia5-dev qtdeclarative5-dev libqt5xmlpattern5-dev
+sudo apt install qtbase5-examples qtbase5-doc-html
+sudo apt install libvlccore-dev libvlc-dev
+sudo apt install thunar-vcs-plugin
+
+sudo apt install libgl1-mesa-dev mesa-common-dev
+
+sudo apt install zlib1g-dev
+sudo apt install libqt5webkit5-dev
+sudo apt install libqscintilla2-qt5-dev
+sudo apt install libquazip5-dev
+sudo apt install libqwt-qt5-dev
+sudo apt install libpoppler-qt5-dev
+
+/**********************************************************************************************************************
+ *
+ *********************************************************************************************************************/
+
+https://github.com/fffaraz/QtWebApp.git
+https://github.com/b0bh00d/QtDropbox2.git
+https://github.com/bricke/Qt-AES.git
+
+git clone https://github.com/TheDZhon/wwwidgets.git
+qmake
+make
+sudo make install
+
+git clone git://github.com/vlc-qt/vlc-qt.git
+mkdir build
+cd build
+cmake .. -DCMAKE_BUILD_TYPE=Release
+make
+sudo make install
+

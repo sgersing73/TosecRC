@@ -1,0 +1,10 @@
+// convenience header
+#include "qwebdatabase.h"
+#include "qwebelement.h"
+#include "qwebfullscreenrequest.h"
+#include "qwebhistory.h"
+#include "qwebhistoryinterface.h"
+#include "qwebkitplatformplugin.h"
+#include "qwebpluginfactory.h"
+#include "qwebsecurityorigin.h"
+#include "qwebsettings.h"

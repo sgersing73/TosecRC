@@ -1,0 +1,101 @@
+<RCC>
+    <qresource prefix="/icon/farious/blue">
+        <file>images/farious/blue/files.ico</file>
+        <file>images/farious/blue/game.ico</file>
+        <file>images/farious/blue/gift.ico</file>
+        <file>images/farious/blue/image.ico</file>
+        <file>images/farious/blue/key.ico</file>
+        <file>images/farious/blue/magic.ico</file>
+        <file>images/farious/blue/presentation.ico</file>
+        <file>images/farious/blue/save.ico</file>
+        <file>images/farious/blue/search.ico</file>
+        <file>images/farious/blue/star.ico</file>
+        <file>images/farious/blue/systems.ico</file>
+        <file>images/farious/blue/upload.ico</file>
+        <file>images/farious/blue/usbstick.ico</file>
+        <file>images/farious/blue/verify.ico</file>
+        <file>images/farious/blue/check.ico</file>
+        <file>images/farious/blue/delete.ico</file>
+        <file>images/farious/blue/pipette.ico</file>
+        <file>images/farious/blue/database.ico</file>
+        <file>images/farious/blue/quill.ico</file>
+    </qresource>
+    <qresource prefix="/icon/player">
+        <file>images/player/blue/backward.ico</file>
+        <file>images/player/blue/equalizer.ico</file>
+        <file>images/player/blue/forward.ico</file>
+        <file>images/player/blue/pause.ico</file>
+        <file>images/player/blue/play.ico</file>
+        <file>images/player/blue/radio.ico</file>
+        <file>images/player/blue/stop.ico</file>
+        <file>images/player/green/backward.ico</file>
+        <file>images/player/green/equalizer.ico</file>
+        <file>images/player/green/forward.ico</file>
+        <file>images/player/green/pause.ico</file>
+        <file>images/player/green/play.ico</file>
+        <file>images/player/green/radio.ico</file>
+        <file>images/player/green/stop.ico</file>
+        <file>images/player/red/backward.ico</file>
+        <file>images/player/red/equalizer.ico</file>
+        <file>images/player/red/forward.ico</file>
+        <file>images/player/red/pause.ico</file>
+        <file>images/player/red/play.ico</file>
+        <file>images/player/red/radio.ico</file>
+        <file>images/player/red/stop.ico</file>
+        <file>images/player/yellow/backward.ico</file>
+        <file>images/player/yellow/equalizer.ico</file>
+        <file>images/player/yellow/forward.ico</file>
+        <file>images/player/yellow/pause.ico</file>
+        <file>images/player/yellow/play.ico</file>
+        <file>images/player/yellow/radio.ico</file>
+        <file>images/player/yellow/stop.ico</file>
+        <file>images/player/blue/save.ico</file>
+        <file>images/player/green/save.ico</file>
+        <file>images/player/red/save.ico</file>
+        <file>images/player/yellow/save.ico</file>
+    </qresource>
+    <qresource prefix="/images">
+        <file>images/splash.gif</file>
+        <file>images/tosec.png</file>
+        <file>images/youtube/missing.png</file>
+        <file>images/youtube/strip.gif</file>
+        <file>images/Dropbox.png</file>
+    </qresource>
+    <qresource prefix="/icon/toolbar/blue">
+        <file>images/toolbar/blue/1471905738_Dropbox.ico</file>
+        <file>images/toolbar/blue/book.ico</file>
+        <file>images/toolbar/blue/download.ico</file>
+        <file>images/toolbar/blue/exit.ico</file>
+        <file>images/toolbar/blue/lock.ico</file>
+        <file>images/toolbar/blue/setttings.ico</file>
+        <file>images/toolbar/blue/shield.ico</file>
+        <file>images/toolbar/blue/unlock.ico</file>
+    </qresource>
+    <qresource prefix="/stylesheet/bronze">
+        <file>images/style/bronze/background.png</file>
+        <file>images/style/bronze/checkmark.png</file>
+        <file>images/style/bronze/checkmark-disabled.png</file>
+        <file>images/style/bronze/checkmark-partial.png</file>
+    </qresource>
+    <qresource prefix="/stylesheet/wood">
+        <file>images/style/wood/woodbackground.png</file>
+        <file>images/style/wood/woodbutton.png</file>
+    </qresource>
+    <qresource prefix="/cursor">
+        <file>images/cursor/amiga/amiga_original/amiga_arrow.cur</file>
+    </qresource>
+    <qresource prefix="/program/icon">
+        <file>images/Mcdo-Design-Cats-2-Dot-Mac-Logo.ico</file>
+    </qresource>
+    <qresource prefix="/images/ftp">
+        <file>images/farious/dir/cdtoparent.png</file>
+        <file>images/farious/dir/dir.png</file>
+        <file>images/farious/dir/file.png</file>
+        <file>images/farious/dir/delete.ico</file>
+        <file>images/farious/dir/download.ico</file>
+        <file>images/farious/dir/list.ico</file>
+        <file>images/farious/dir/mkdir.ico</file>
+        <file>images/farious/dir/up.ico</file>
+        <file>images/farious/dir/upload.ico</file>
+    </qresource>
+</RCC>

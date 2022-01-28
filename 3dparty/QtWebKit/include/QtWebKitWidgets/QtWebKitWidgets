@@ -1,0 +1,6 @@
+// convenience header
+#include "qgraphicswebview.h"
+#include "qwebframe.h"
+#include "qwebinspector.h"
+#include "qwebpage.h"
+#include "qwebview.h"
