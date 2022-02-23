@@ -1,5 +1,2 @@
-Test
-<<<<<<< HEAD
-2
-=======
->>>>>>> 3310df9e6cf6530f8a45b286c214156f3698db2e
+Compile under Debian 
+
