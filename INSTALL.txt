@@ -37,6 +37,7 @@ make
 sudo make install
 
 git clone git://github.com/vlc-qt/vlc-qt.git
+cd vlc-qt
 mkdir build
 cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
