@@ -31,6 +31,7 @@ https://github.com/b0bh00d/QtDropbox2.git
 https://github.com/bricke/Qt-AES.git
 
 git clone https://github.com/TheDZhon/wwwidgets.git
+cd wwidgets
 qmake
 make
 sudo make install
