@@ -7,8 +7,8 @@ sudo chgrp users /tosec
 sudo chmod 775 /tosec
 sudo usermod -a -G users $USER
 
-sudo apt install git cmake subversion
-sudo apt install qtcreator qt5-default qttools5-dev-tools qt5-doc qtmultimedia5-dev qtdeclarative5-dev libqt5xmlpatterns5-dev
+sudo apt install git cmake subversion qtcreator
+sudo apt install qttools5-dev-tools qt5-doc qtmultimedia5-dev qtdeclarative5-dev libqt5xmlpatterns5-dev
 sudo apt install qtbase5-examples qtbase5-doc-html
 sudo apt install libvlccore-dev libvlc-dev
 sudo apt install thunar-vcs-plugin
@@ -43,4 +43,19 @@ cd build
 cmake .. -DCMAKE_BUILD_TYPE=Release
 make
 sudo make install
+
+git clone https://github.com/sgersing73/TosecRC.git
+cd 3dparty/Version/
+qmake
+make
+cd ..
+cd ..
+qmake
+make
+
+
+
+
+
+
 
