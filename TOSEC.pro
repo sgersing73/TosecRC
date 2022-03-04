@@ -167,7 +167,6 @@ HEADERS  += config.h \
         src/widgets/AmigaFuture/amigafuture.h \
         src/widgets/ScrollText/scrolltext.h \
         src/widgets/SwitchButton/switchbutton.h \
-        version.h \
         mainwindow.h \
         src/modules/checktime.h \
         src/modules/ftpserver.h \
