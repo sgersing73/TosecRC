@@ -2,9 +2,9 @@
 
 # Ziel-Verzeichniss anlegen und Benutzerrechte vergeben
 
-sudo mkdir /tosec
-sudo chgrp users /tosec
-sudo chmod 775 /tosec
+sudo mkdir /opt/Tosec
+sudo chgrp users /opt/Tosec
+sudo chmod 775 /opt/Tosec
 sudo usermod -a -G users $USER
 
 sudo apt install git cmake subversion qtcreator
@@ -26,10 +26,6 @@ sudo apt install libpoppler-qt5-dev
  *
  *********************************************************************************************************************/
 
-https://github.com/fffaraz/QtWebApp.git
-https://github.com/b0bh00d/QtDropbox2.git
-https://github.com/bricke/Qt-AES.git
-
 git clone https://github.com/TheDZhon/wwwidgets.git
 cd wwidgets
 qmake
@@ -45,17 +41,10 @@ make
 sudo make install
 
 git clone https://github.com/sgersing73/TosecRC.git
-cd 3dparty/Version/
+cd TosecRC/3dparty/Version/
 qmake
 make
 cd ..
 cd ..
 qmake
 make
-
-
-
-
-
-
-
