@@ -27,7 +27,7 @@ sudo apt install libpoppler-qt5-dev
  *********************************************************************************************************************/
 
 git clone https://github.com/TheDZhon/wwwidgets.git
-cd wwidgets
+cd wwwidgets
 qmake
 make
 sudo make install
