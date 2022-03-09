@@ -9,7 +9,7 @@ sudo usermod -a -G users $USER
 
 sudo apt install git cmake subversion qtcreator
 sudo apt install qttools5-dev-tools qt5-doc qtmultimedia5-dev qtdeclarative5-dev libqt5xmlpatterns5-dev
-sudo apt install qtbase5-examples qtbase5-doc-html
+sudo apt install qtbase5-examples qtbase5-doc-html qt5-image-formats-plugins
 sudo apt install libvlccore-dev libvlc-dev
 sudo apt install thunar-vcs-plugin
 
