@@ -71,9 +71,6 @@ bool db::open_sqlite(QString db) {
             m_db.exec("CREATE INDEX IF NOT EXISTS index_setname ON files (SETNAME);");
             m_db.exec("CREATE INDEX IF NOT EXISTS index_system_setname ON files (SYSTEM, SETNAME);");
 
-            //m_db.exec("ALTER TABLE FILES ADD COLUMN ROMSETPUP TEXT NOT NULL DEFAULT ' ';");
-
-           // m_db.exec("PRAGMA auto_vacuum = FULL");
             m_db.exec("PRAGMA synchronous = OFF");
             m_db.exec("PRAGMA journal_mode = MEMORY");
 
@@ -182,7 +179,7 @@ int db::storeFilesData(QVariantList values) {
 
     if ( roms.count() == 0 ) { // ROM nicht gefunden...
 
-        q.prepare("INSERT INTO files VALUES (NULL,:CRC,:SYSTEM,:SETNAME,:TITLE,:NAME,:SIZE,:MD5,:SHA1,:PATH,:EMUL,:EATTR,:FAVORITE,:RATEING,:ROMSET,:GAMEBASE,:NONTOSEC,:RANKING,:MULTIROM,:VARIANTS,:ROMSTATE,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,:ROMSETPUP);");
+        q.prepare("INSERT INTO files VALUES (NULL,:CRC,:SYSTEM,:SETNAME,:TITLE,:NAME,:SIZE,:MD5,:SHA1,:PATH,:EMUL,:EATTR,:FAVORITE,:RATEING,:ROMSET,:GAMEBASE,:NONTOSEC,:RANKING,:MULTIROM,:VARIANTS,:ROMSTATE,:ROMSETPUP,CURRENT_TIMESTAMP,CURRENT_TIMESTAMP);");
         q.bindValue(":CRC", values.at(0));
         q.bindValue(":SYSTEM", values.at(1));
         q.bindValue(":SETNAME", values.at(2));
