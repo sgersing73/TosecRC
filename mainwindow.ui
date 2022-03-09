@@ -201,11 +201,6 @@
                <height>16777215</height>
               </size>
              </property>
-             <property name="font">
-              <font>
-               <pointsize>11</pointsize>
-              </font>
-             </property>
             </widget>
             <widget class="QGroupBox" name="grpBrowser">
              <property name="title">
@@ -259,7 +254,7 @@
                  <widget class="QComboBox" name="cboHtmlLinks"/>
                 </item>
                 <item>
-                 <widget class="QWebView" name="webView" native="true">
+                 <widget class="QWebView" name="webView">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
                     <horstretch>0</horstretch>
@@ -272,18 +267,12 @@
                     <height>16777215</height>
                    </size>
                   </property>
-                  <property name="font">
-                   <font>
-                    <family>Tahoma</family>
-                    <pointsize>10</pointsize>
-                   </font>
-                  </property>
-                  <property name="url" stdset="0">
+                  <property name="url">
                    <url>
                     <string>about:blank</string>
                    </url>
                   </property>
-                  <property name="zoomFactor" stdset="0">
+                  <property name="zoomFactor">
                    <double>0.800000011920929</double>
                   </property>
                  </widget>
@@ -432,15 +421,6 @@
          </item>
          <item row="3" column="0">
           <widget class="QTableWidget" name="tableWidgetInfo">
-           <property name="font">
-            <font>
-             <pointsize>11</pointsize>
-             <weight>50</weight>
-             <bold>false</bold>
-             <stylestrategy>PreferAntialias</stylestrategy>
-             <kerning>false</kerning>
-            </font>
-           </property>
            <property name="autoFillBackground">
             <bool>false</bool>
            </property>
@@ -973,7 +953,7 @@
      <x>0</x>
      <y>0</y>
      <width>1575</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuDatei">
@@ -1302,7 +1282,7 @@
   <customwidget>
    <class>QWebView</class>
    <extends>QWidget</extends>
-   <header>QtWebKitWidgets/QWebView</header>
+   <header location="global">QtWebKitWidgets/QWebView</header>
   </customwidget>
   <customwidget>
    <class>Musik</class>
