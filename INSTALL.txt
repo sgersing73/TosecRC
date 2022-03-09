@@ -22,7 +22,12 @@ sudo apt install libquazip5-dev
 sudo apt install libqwt-qt5-dev
 sudo apt install libpoppler-qt5-dev
 
-sudo apt install vlc wget sqlitebrowser youtube-dl
+sudo apt install vlc wget sqlitebrowser python
+
+/* Youtube-dl*/
+
+sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
 
 /* AES encrypt the rom files */
 
