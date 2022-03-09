@@ -9,7 +9,7 @@ sudo usermod -a -G users $USER
 
 sudo apt install git cmake subversion qtcreator
 sudo apt install qttools5-dev-tools qt5-doc qtmultimedia5-dev qtdeclarative5-dev libqt5xmlpatterns5-dev
-sudo apt install qtbase5-examples qtbase5-doc-html
+sudo apt install qtbase5-examples qtbase5-doc-html qt5-image-formats-plugins
 sudo apt install libvlccore-dev libvlc-dev
 sudo apt install thunar-vcs-plugin
 
@@ -22,8 +22,23 @@ sudo apt install libquazip5-dev
 sudo apt install libqwt-qt5-dev
 sudo apt install libpoppler-qt5-dev
 
+sudo apt install vlc wget sqlitebrowser python
+
+/* Youtube-dl*/
+
+sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
+sudo chmod a+rx /usr/local/bin/youtube-dl
+
+/* AES encrypt the rom files */
+
+wget https://www.aescrypt.com/download/v3/linux/aescrypt-3.16.tgz
+tar zxvf aescrypt-3.16.tgz 
+make
+make test
+sudo make install 
+
 /**********************************************************************************************************************
- *
+ * Download the source and build the program
  *********************************************************************************************************************/
 
 git clone https://github.com/TheDZhon/wwwidgets.git
