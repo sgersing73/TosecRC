@@ -24,8 +24,16 @@ sudo apt install libpoppler-qt5-dev
 
 sudo apt install vlc wget sqlitebrowser
 
+/* AES encrypt the rom files */
+
+wget https://www.aescrypt.com/download/v3/linux/aescrypt-3.16.tgz
+tar zxvf aescrypt-3.16.tgz 
+make
+make test
+sudo make install 
+
 /**********************************************************************************************************************
- *
+ * Download the source and build the program
  *********************************************************************************************************************/
 
 git clone https://github.com/TheDZhon/wwwidgets.git
