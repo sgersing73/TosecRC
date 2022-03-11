@@ -574,6 +574,8 @@ QList<QString> db::getSetNames(QVariantList values) {
 
 QList<rom_type> db::getSoftwareNames(QString system, QString setname, int mode, QString search, int Gamebase) {
 
+    m_timer.start();
+
     qDebug() << "getSoftwareNames" << system << setname << mode << search << Gamebase;
 
     QSqlQuery q;
@@ -650,7 +652,7 @@ QList<rom_type> db::getSoftwareNames(QString system, QString setname, int mode, 
         }
     }
 
-    qDebug() << "db::getSoftwareNames" << m_timer.elapsed();
+    qDebug() << "db::getSoftwareNames ms:" << m_timer.elapsed();
 
     return (roms);
 }

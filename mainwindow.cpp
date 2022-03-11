@@ -1188,7 +1188,7 @@ void MainWindow::ShowContextMenuRomInfo(const QPoint& pos) {
         sha = ui->tableWidget->item(6, 1); // Sha
         tit = ui->tableWidget->item(4, 1); // Title
 
-        QString ss = m_FileStorage + "../Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
+        QString ss = m_TosecMain + "/Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
 
         QDir dir;
         dir.mkpath(ss);
@@ -1229,7 +1229,7 @@ void MainWindow::ShowContextMenuRomInfo(const QPoint& pos) {
         set = ui->tableWidget->item(1, 1); // Set
         sha = ui->tableWidget->item(6, 1); // Sha
 
-        QString ss = m_FileStorage + "../Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
+        QString ss = m_TosecMain + "/Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
 
         QDir dir;
         dir.mkpath(ss);
@@ -1265,7 +1265,7 @@ void MainWindow::ShowContextMenuRomInfo(const QPoint& pos) {
         set = ui->tableWidget->item(1, 1); // Set
         sha = ui->tableWidget->item(6, 1); // Sha
 
-        QString ss = m_FileStorage + "../Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
+        QString ss = m_TosecMain + "/Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
 
         m_screenshotfilelist.clear();
         m_soundtracklist.clear();
@@ -4846,7 +4846,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
             ui->tableWidget->item(19,1)->setFlags(ui->tableWidget->item(19,1)->flags() ^ Qt::ItemIsEditable);
             ui->tableWidget->item(20,1)->setFlags(ui->tableWidget->item(20,1)->flags() ^ Qt::ItemIsEditable);
 
-            QString ss = m_FileStorage + "../Stuffpacks/" + rom.SYSTEM + "/" + rom.SHA + "/";
+            QString ss = m_TosecMain + "/Stuffpacks/" + rom.SYSTEM + "/" + rom.SHA + "/";
 
             // -----------------------------------------------------------------------------------------
 
@@ -5064,7 +5064,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
                             QPixmap pix1(picfilename) ;
 
                             ui->cmdLink1->setText("");
-                            ui->cmdLink1->setIconSize(QSize(pix1.width(), pix1.height()));
+                            ui->cmdLink1->setIconSize( QSize(pix1.width() * 0.5, pix1.height() * 0.5 ));
                             ui->cmdLink1->setIcon(QIcon(pix1));
                             ui->cmdLink1->setToolTip(link);
                             ui->cmdLink1->setHidden(false);
@@ -5082,7 +5082,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
                             QPixmap pix2(picfilename) ;
 
                             ui->cmdLink2->setText("");
-                            ui->cmdLink2->setIconSize(QSize(pix2.width(), pix2.height()));
+                            ui->cmdLink2->setIconSize(QSize(pix2.width() * 0.5, pix2.height() * 0.5));
                             ui->cmdLink2->setIcon(QIcon(pix2));
                             ui->cmdLink2->setToolTip(link);
                             ui->cmdLink2->setHidden(false);
@@ -5100,7 +5100,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
                             QPixmap pix3(picfilename) ;
 
                             ui->cmdLink3->setText("");
-                            ui->cmdLink3->setIconSize(QSize(pix3.width(), pix3.height()));
+                            ui->cmdLink3->setIconSize(QSize(pix3.width() * 0.5, pix3.height() * 0.5));
                             ui->cmdLink3->setIcon(QIcon(pix3));
                             ui->cmdLink3->setToolTip(link);
                             ui->cmdLink3->setHidden(false);
@@ -5118,7 +5118,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
                             QPixmap pix4(picfilename) ;
 
                             ui->cmdLink4->setText("");
-                            ui->cmdLink4->setIconSize(QSize(pix4.width(), pix4.height()));
+                            ui->cmdLink4->setIconSize(QSize(pix4.width() * 0.5, pix4.height() * 0.5));
                             ui->cmdLink4->setIcon(QIcon(pix4));
                             ui->cmdLink4->setToolTip(link);
                             ui->cmdLink4->setHidden(false);
@@ -5189,7 +5189,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
                         ui->widGamebase->setHidden(true);
                     }
                 }
-
+/*
                 QVariantList values;
 
                 QString rating = m_settings.loadStringSetting(filename, "Global", "rating");
@@ -5202,7 +5202,7 @@ void MainWindow::on_tableWidgetInfo_itemClicked(QTableWidgetItem *item)
 
                     }
                 }
-
+*/
             }
 
             this->repaint();
@@ -5431,7 +5431,7 @@ void MainWindow::MakeStuffPack(QString system, QString sha1) {
         //fileCompressed = m_TempPath + "/" + rom.SYSTEM + "/" + rom.SETNAME + "/" + sha1 + ".zip";
         fileCompressed = m_TempPath + "/" + rom.SYSTEM + "/" + sha1 + ".zip";
 
-        QString stuffDir = m_FileStorage + "../Stuffpacks/" + rom.SYSTEM + "/" + rom.SHA ;
+        QString stuffDir = m_TosecMain + "/Stuffpacks/" + rom.SYSTEM + "/" + rom.SHA ;
 
         if ( QFile::exists( stuffDir + "/" + "info.txt" ) ) {
 
@@ -5508,7 +5508,7 @@ void MainWindow::ImportStuffPack(QString filename) {
 
         fileCompressed = fi.filePath().remove("file:///");
 
-        QString stuffDir = m_FileStorage + "../Stuffpacks/" + rom.SYSTEM + "/" + sha1 ;
+        QString stuffDir = m_TosecMain + "/Stuffpacks/" + rom.SYSTEM + "/" + sha1 ;
 
         QStringList files = JlCompress::extractDir( fileCompressed, stuffDir ) ;
 
@@ -6735,7 +6735,7 @@ void MainWindow::on_cmdSoundtrack_clicked()
         sha = ui->tableWidget->item(6, 1); // Sha
         tit = ui->tableWidget->item(4, 1); // Title
 
-        QString ss = m_FileStorage + "../Stuffpacks/" + sys->text() + "/" + sha->text() + "/soundtrack";
+        QString ss = m_TosecMain + "/Stuffpacks/" + sys->text() + "/" + sha->text() + "/soundtrack";
 
         ui->widMP3->setFilePath( ss );
 
@@ -6856,7 +6856,7 @@ void MainWindow::loadStuffPackContents(int id) {
 
     if ( m_db.selectRomData( id, rom ) ) {
 
-        QString stuffDir = m_FileStorage + "../Stuffpacks/" + rom.SYSTEM + "/" + rom.SHA ;
+        QString stuffDir = m_TosecMain + "/Stuffpacks/" + rom.SYSTEM + "/" + rom.SHA ;
 
         QString infoFile = stuffDir + "/" + "info.txt";
 
@@ -7165,7 +7165,7 @@ void MainWindow::buildStuffpackZipFiles(QString system, QString setName) {
                                    tr("Archives (*.zip)"));
 
 
-        file.setPath( "T:/Stuffpacks/" + system );
+        file.setPath( m_TosecMain + "/Stuffpacks/" + system );
 
     } else {
 
@@ -7173,7 +7173,7 @@ void MainWindow::buildStuffpackZipFiles(QString system, QString setName) {
                                    m_TempPath + "/" + setName +"_stuffpack.zip",
                                    tr("Archives (*.zip)"));
 
-        file.setPath( "T:/Stuffpacks/" + system + "/" + setName );
+        file.setPath( m_TosecMain + "/Stuffpacks/" + system + "/" + setName );
     }
 
     if ( saveFileName.isEmpty() ) {
@@ -7290,7 +7290,7 @@ void MainWindow::on_cmdTheGamesDB_clicked()
     sha = ui->tableWidget->item(6, 1); // Sha
     tit = ui->tableWidget->item(4, 1); // Title
 
-    QString ss = m_FileStorage + "../Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
+    QString ss = m_TosecMain + "/Stuffpacks/" + sys->text() + "/" + sha->text() + "/";
 
     QDir dir;
     dir.mkpath(ss);

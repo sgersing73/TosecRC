@@ -11,6 +11,7 @@
 #include "QJsonDocument"
 
 #include "src/modules/xml.h"
+#include "src/modules/tools.h"
 
 namespace Ui {
 class TheGamesDB;
@@ -71,6 +72,7 @@ private:
 
     QString               m_FileName;
     thegamesdb_type       m_thegamesdb;
+    tools                 m_tools;
 
     QString               m_TempPath;
     QString               m_caption;

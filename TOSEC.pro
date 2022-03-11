@@ -7,13 +7,16 @@ MAJOR = 1
 MINOR = 2
 VERSION_HEADER = version.h
 
-release: DESTDIR = build/release
-debug:   DESTDIR = build/debug
+release: DESTDIR = /opt/Tosec
+debug:   DESTDIR = /opt/Tosec
 
-OBJECTS_DIR = $$DESTDIR/.obj
-MOC_DIR = $$DESTDIR/.moc
-RCC_DIR = $$DESTDIR/.qrc
-UI_DIR = $$DESTDIR/.ui
+release: BUILDDIR = build/release
+debug:   BUILDDIR = build/debug
+
+OBJECTS_DIR = $$BUILDDIR/.obj
+MOC_DIR = $$BUILDDIR/.moc
+RCC_DIR = $$BUILDDIR/.qrc
+UI_DIR = $$BUILDDIR/.ui
 
 versiontarget.target = $$VERSION_HEADER
 versiontarget.depends = FORCE
@@ -26,7 +29,7 @@ QMAKE_EXTRA_TARGETS += versiontarget
 
 RC_ICONS = images/Mcdo-Design-Cats-2-Dot-Mac-Logo.ico
 
-CONFIG 	 += c++11
+CONFIG 	 += c++11 copy_files
 
 win32{
   QMAKE_CXXFLAGS += -D_WIN32_WINNT=0x600 -Wno-deprecated-declarations -static-libgcc -static-libstdc++ -ggdb -Wno-unused-parameter -Wno-unused-but-set-variable -Wno-zero-as-null-pointer-constant -Wimplicit-fallthrough

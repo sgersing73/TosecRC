@@ -386,9 +386,16 @@ void TheGamesDB::on_cmdCreateStuffPack_clicked()
 
     if ( true ) {
 
+        qDebug() << ui->lblStuffpack->text();
+
+        QString outDir = ui->lblStuffpack->text();
+        m_tools.createDir( outDir.remove("/info.txt") );
+
         QFile file( ui->lblStuffpack->text() );
-        if (!file.open(QIODevice::WriteOnly | QIODevice::Text))
+        if (!file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+            QMessageBox::critical(this, this->windowTitle(),  tr("Unable to open stuffpack file: %1").arg( file.errorString() ) );
             return;
+        }
 
         QTextStream out(&file);
 
