@@ -70,29 +70,47 @@ void SidPlayer::on_cmdHVSC_clicked()
 {
     QString values = _settings.loadStringSetting(INI_FILE, "MusicPlayer", "HVSC");
 
-    if ( values.count() > 0 ) {
-        emit setWebView(values.split(";").at(1));
+    if ( ! values.isEmpty() ) {
+
+        if ( values.contains(";") ) {
+
+            // Nach dem Semikolon kommt die URL
+            emit setWebView(values.split(";").at(1));
+        }
+
+        ui->treeView->setCurrentIndex(_dirModel->index(values.split(";").at(0)));
     }
 
-    ui->treeView->setCurrentIndex(_dirModel->index(values.split(";").at(0)));
 }
 
 void SidPlayer::on_cmdProjectAY_clicked()
 {
     QString values = _settings.loadStringSetting(INI_FILE, "MusicPlayer", "ProjectAY");
 
-    if ( values.count() > 0 ) {
-        emit setWebView(values.split(";").at(1));
-    }
+    if ( ! values.isEmpty() ) {
 
-    ui->treeView->setCurrentIndex(_dirModel->index(values.split(";").at(0)));
+        if ( values.contains(";") ) {
+
+            // Nach dem Semikolon kommt die URL
+            emit setWebView(values.split(";").at(1));
+        }
+
+        ui->treeView->setCurrentIndex(_dirModel->index(values.split(";").at(0)));
+    }
 }
 
 void SidPlayer::on_pushButton_clicked()
 {
     QString values = _settings.loadStringSetting(INI_FILE, "MusicPlayer", "CGSC");
 
-    emit setWebView(values.split(";").at(1));
+    if ( ! values.isEmpty() ) {
 
-    ui->treeView->setCurrentIndex(_dirModel->index(values.split(";").at(0)));
+        if ( values.contains(";") ) {
+
+            // Nach dem Semikolon kommt die URL
+            emit setWebView(values.split(";").at(1));
+        }
+
+        ui->treeView->setCurrentIndex(_dirModel->index(values.split(";").at(0)));
+    }
 }
