@@ -2477,7 +2477,6 @@ void MainWindow::loadRomList(QString RomSet) {
 
         if ( software.size() == 0 ) {
 
-
             // wenn wir nichts gefunden haben, dann Alle laden
             m_actSelectionMode = 0;
 
@@ -2492,13 +2491,30 @@ void MainWindow::loadRomList(QString RomSet) {
         }
     }
 
-    ui->tableWidgetInfo->horizontalHeader()->setVisible(false);
+    ui->tableWidgetInfo->horizontalHeader()->setVisible(true);
+    ui->tableWidgetInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidgetInfo->verticalHeader()->setVisible(false);
     ui->tableWidgetInfo->setColumnCount(5);
     ui->tableWidgetInfo->setRowCount(0);
     ui->tableWidgetInfo->setItemDelegate(new StarDelegate);
 
     ui->tableWidgetInfo->setUpdatesEnabled(false);
+
+    QTableWidgetItem *header0 = new QTableWidgetItem();
+    header0->setText("Ranking");
+    ui->tableWidgetInfo->setHorizontalHeaderItem(0,header0);
+    QTableWidgetItem *header1 = new QTableWidgetItem();
+    header1->setText("Rating");
+    ui->tableWidgetInfo->setHorizontalHeaderItem(1,header1);
+    QTableWidgetItem *header2 = new QTableWidgetItem();
+    header2->setText("Favorit");
+    ui->tableWidgetInfo->setHorizontalHeaderItem(2,header2);
+    QTableWidgetItem *header3 = new QTableWidgetItem();
+    header3->setText("Suffix");
+    ui->tableWidgetInfo->setHorizontalHeaderItem(3,header3);
+    QTableWidgetItem *header4 = new QTableWidgetItem();
+    header4->setText("Title");
+    ui->tableWidgetInfo->setHorizontalHeaderItem(4,header4);
 
     int counter = 0;
 
@@ -2624,6 +2640,7 @@ void MainWindow::loadRomList(QString RomSet) {
     } else {
         ui->lblAnzRomInfo->setText( QString("%1 title loaded").arg(ui->tableWidgetInfo->rowCount() ) );
     }
+
     this->showMessage("");
 
     QApplication::restoreOverrideCursor();
@@ -5320,6 +5337,7 @@ void MainWindow::loadSystemList()
     CHECKTIME ( systems = m_db.getSystemOverview(); );
 
     ui->tableWidgetInfo->horizontalHeader()->setVisible(true);
+    ui->tableWidgetInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidgetInfo->verticalHeader()->setVisible(false);
     ui->tableWidgetInfo->setColumnCount(5);
     ui->tableWidgetInfo->setRowCount(0);
@@ -5385,7 +5403,7 @@ void MainWindow::loadSystemList()
         counter++;
     }
 
-    ui->tableWidgetInfo->resizeColumnsToContents();
+    ui->tableWidgetInfo->resizeColumnsToContents();   
     ui->tableWidgetInfo->resizeRowsToContents();
 
     QSettings settings("state.ini", QSettings::IniFormat);
@@ -5696,6 +5714,7 @@ void MainWindow::loadSystemCounter()
     ifile.close();
 
     ui->tableWidgetInfo->horizontalHeader()->setVisible(true);
+    ui->tableWidgetInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidgetInfo->verticalHeader()->setVisible(false);
     ui->tableWidgetInfo->setColumnCount(4);
     ui->tableWidgetInfo->setRowCount(0);
@@ -5815,13 +5834,14 @@ void MainWindow::verifyTosecDB() {
 
     this->setStartButtonMode(false);
 
-   this->showMessage("loading...");
+   this->showMessage("loading file information from database for system " + ui->cboSystems->currentText());
 
     tosecs = m_db.getSoftwareNames(ui->cboSystems->currentText(), "", 7, "", 0);
 
    this->showMessage( QString("%1").arg(tosecs.count()) + " entries found...");
 
     ui->tableWidgetInfo->horizontalHeader()->setVisible(true);
+    ui->tableWidgetInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidgetInfo->verticalHeader()->setVisible(false);
     ui->tableWidgetInfo->setColumnCount(1);
     ui->tableWidgetInfo->setRowCount(0);
@@ -5834,7 +5854,7 @@ void MainWindow::verifyTosecDB() {
 
     for (int i = 0; ( ( i < tosecs.size() ) && ! m_beenden ); ++i) {
 
-        SetStatusBar(0, tosecs.size(), i, "process " + QString("%1").arg(i), ( i==0 )?true:false  ) ;
+        SetStatusBar(0, tosecs.size(), i,  QString("System: %1 - process file %2 of %3 ").arg(ui->cboSystems->currentText()).arg(i).arg(tosecs.size()), ( i==0 )?true:false  ) ;
 
         if ( ! ( tosecs.at(i).PATH.contains("missing") ) ) {
 
@@ -5989,15 +6009,15 @@ void MainWindow::verifyTosecDB() {
         QCoreApplication::processEvents();
     }
 
-    //ui->tableWidgetInfo->resizeColumnsToContents();
+    ui->tableWidgetInfo->resizeColumnsToContents();
     ui->tableWidgetInfo->resizeRowsToContents();
 
     QSettings settings("state.ini", QSettings::IniFormat);
     QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
     ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
 
-//    this->clearDir(m_CachePath, false, false, ui->cboSystems->currentText() + ".cache");
-//    this->clearDir(m_CachePath, false, false, "Systems.cache");
+    this->clearDir(m_CachePath, false, false, ui->cboSystems->currentText() + ".cache");
+    this->clearDir(m_CachePath, false, false, "Systems.cache");
 
     ResetStatusBar();
 
