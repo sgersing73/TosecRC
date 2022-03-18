@@ -2492,7 +2492,7 @@ void MainWindow::loadRomList(QString RomSet) {
     }
 
     ui->tableWidgetInfo->horizontalHeader()->setVisible(true);
-    ui->tableWidgetInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    ui->tableWidgetInfo->horizontalHeader()->setSectionResizeMode(QHeaderView::ResizeToContents);
     ui->tableWidgetInfo->verticalHeader()->setVisible(false);
     ui->tableWidgetInfo->setColumnCount(5);
     ui->tableWidgetInfo->setRowCount(0);
@@ -2630,10 +2630,10 @@ void MainWindow::loadRomList(QString RomSet) {
         }
     }
 
-    ui->tableWidgetInfo->setUpdatesEnabled(true);
-
     ui->tableWidgetInfo->resizeColumnsToContents();
     ui->tableWidgetInfo->resizeRowsToContents();
+
+    ui->tableWidgetInfo->setUpdatesEnabled(true);
 
     if ( ui->chkOnlyValid->isChecked() ) {
         ui->lblAnzRomInfo->setText( QString("%1 title loaded, %2 in storage").arg(ui->tableWidgetInfo->rowCount()).arg(inStorageCount) );
@@ -2796,8 +2796,8 @@ void MainWindow::saveSettings() {
     settings.setValue("mainSplitterState3", ui->splitter_3->saveState());
     settings.setValue("mainSplitterState4", ui->splitter_4->saveState());
 
-    QByteArray MyArray = ui->tableWidgetInfo->horizontalHeader()->saveState();
-    settings.setValue(QString("mainTableWidth%1").arg(m_GridMode), MyArray);
+    //QByteArray MyArray = ui->tableWidgetInfo->horizontalHeader()->saveState();
+    //settings.setValue(QString("mainTableWidth%1").arg(m_GridMode), MyArray);
 }
 
 /**********************************************************************************************************************
@@ -4267,7 +4267,7 @@ void MainWindow::handleToolBarNews(QAction *action) {
  *********************************************************************************************************************/
 void MainWindow::handleToolBarSystem(QAction *action) {
 
-    qDebug() << "handleToolBarSystem";
+    qDebug() << "handleToolBarSystem" << action->objectName();
 
     QString system  = action->objectName();
 
@@ -4277,14 +4277,6 @@ void MainWindow::handleToolBarSystem(QAction *action) {
     QString youtube = m_settings.loadStringSetting("system.ini", system, "youtube");
 
     m_actPcbUrl = m_settings.loadStringSetting("system.ini", system, "pcb");
-
-    if ( ! program.isEmpty() ) {
-        if ( param.isEmpty()) {
-            this->ExecuteProgram(program, QStringList() );
-        } else {
-            this->ExecuteProgram(program, QStringList() << param.split(" "));
-        }
-    }
 
     if( ! html.isEmpty() ) { this->loadWebView(html); }
 
@@ -4298,6 +4290,14 @@ void MainWindow::handleToolBarSystem(QAction *action) {
 
     } else {
         ui->cmdYoutubeVideo->setVisible(false);
+    }
+
+    if ( ! program.isEmpty() ) {
+        if ( param.isEmpty()) {
+            this->ExecuteProgram(program, QStringList(), true );
+        } else {
+            this->ExecuteProgram(program, QStringList() << param.split(" "), true );
+        }
     }
 }
 
@@ -4389,11 +4389,9 @@ void MainWindow::iniToolBarSystem() {
                                                       m_settings.loadIntSetting("system.ini", "Global", "sizey")));
             }
         }
-
-        connect(Menu, SIGNAL(triggered(QAction*)), this, SLOT(handleToolBarSystem(QAction*)));
     }
 
-     ui->toolBarSystems->setVisible(true);
+    ui->toolBarSystems->setVisible(true);
 }
 
 /**********************************************************************************************************************
@@ -5406,9 +5404,9 @@ void MainWindow::loadSystemList()
     ui->tableWidgetInfo->resizeColumnsToContents();   
     ui->tableWidgetInfo->resizeRowsToContents();
 
-    QSettings settings("state.ini", QSettings::IniFormat);
-    QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
-    ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
+ //   QSettings settings("state.ini", QSettings::IniFormat);
+ //   QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
+ //   ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
 
     this->showMessage("");
 
@@ -5775,9 +5773,9 @@ void MainWindow::loadSystemCounter()
     ui->tableWidgetInfo->resizeColumnsToContents();
     ui->tableWidgetInfo->resizeRowsToContents();
 
-    QSettings settings("state.ini", QSettings::IniFormat);
-    QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
-    ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
+   // QSettings settings("state.ini", QSettings::IniFormat);
+   // QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
+   // ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
 
     this->showMessage("");
 
@@ -6012,9 +6010,9 @@ void MainWindow::verifyTosecDB() {
     ui->tableWidgetInfo->resizeColumnsToContents();
     ui->tableWidgetInfo->resizeRowsToContents();
 
-    QSettings settings("state.ini", QSettings::IniFormat);
-    QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
-    ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
+   // QSettings settings("state.ini", QSettings::IniFormat);
+   // QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
+   // ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
 
     this->clearDir(m_CachePath, false, false, ui->cboSystems->currentText() + ".cache");
     this->clearDir(m_CachePath, false, false, "Systems.cache");

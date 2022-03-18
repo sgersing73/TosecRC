@@ -49,7 +49,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../tosec.qrc">
-         <normaloff>:/icon/player/blue/images/player/blue/forward.ico</normaloff>:/icon/player/blue/images/player/blue/forward.ico</iconset>
+         <normaloff>:/icon/player/images/player/blue/forward.ico</normaloff>:/icon/player/images/player/blue/forward.ico</iconset>
        </property>
       </widget>
      </item>
@@ -72,7 +72,7 @@
        </property>
        <property name="icon">
         <iconset resource="../../../tosec.qrc">
-         <normaloff>:/icon/player/blue/images/player/blue/backward.ico</normaloff>:/icon/player/blue/images/player/blue/backward.ico</iconset>
+         <normaloff>:/icon/player/images/player/blue/backward.ico</normaloff>:/icon/player/images/player/blue/backward.ico</iconset>
        </property>
       </widget>
      </item>

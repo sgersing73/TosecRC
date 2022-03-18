@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>226</width>
-    <height>186</height>
+    <width>230</width>
+    <height>194</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -40,11 +40,6 @@
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
-     </property>
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
      </property>
     </widget>
    </item>

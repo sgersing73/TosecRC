@@ -5,9 +5,8 @@ Performance::Performance(QWidget *parent) :
     QGroupBox(parent),
     ui(new Ui::Performance)
 {
-    QString value;
-    double     numOfProcessors = 0;
-    double     memTotalPhys = 0;
+    double  numOfProcessors = 0;
+    double  memTotalPhys = 0;
 
     ui->setupUi(this);
 
@@ -16,6 +15,8 @@ Performance::Performance(QWidget *parent) :
     m_FileStorage = _settings.loadStringSetting(m_sSettingsFile, "General", "FileStorage");
 
 #ifdef _WIN32
+
+    QString value;
 
     PDH_STATUS status;
 
@@ -66,13 +67,13 @@ Performance::Performance(QWidget *parent) :
 #ifdef linux
 
     FILE* fd = fopen("/proc/stat", "r");
-    fscanf(fd, "cpu %llu %llu %llu %llu", &lastTotalUser, &lastTotalUserLow, &lastTotalSys, &lastTotalIdle);
+    int ret = fscanf(fd, "cpu %llu %llu %llu %llu", &lastTotalUser, &lastTotalUserLow, &lastTotalSys, &lastTotalIdle);
     fclose(fd);
 
     numOfProcessors = sysconf(_SC_NPROCESSORS_ONLN);
 
     sysinfo(&memInfo);
-    memTotalPhys = memInfo.totalram;
+    memTotalPhys = ((uint64_t) memInfo.totalram * memInfo.mem_unit)/1024;
 
 #endif
 
@@ -86,10 +87,10 @@ Performance::Performance(QWidget *parent) :
     ValueBarCpu = new ValueBar( Qt::Horizontal, "CPU: (" + QString("%1").arg(numOfProcessors) + " Cores)", this, 100 );
     ValueBarCpu->setFontSize(6);
 
-    ValueBarMemory = new ValueBar( Qt::Horizontal, "RAM: (" + QString("%1").arg(memTotalPhys / ( 1024 * 1024 ) ) + " MB)", this, memTotalPhys / ( 1024 * 1024 ) );
+    ValueBarMemory = new ValueBar( Qt::Horizontal, "RAM: (" + QString("%1").arg(memTotalPhys / ( 1024 * 1024 ) ) + " MB)", this, (uint64_t) memTotalPhys / 1024 );
     ValueBarMemory->setFontSize(6);
 
-    ValueBarStorage = new ValueBar( Qt::Horizontal, "Storage: (" + QString(" %1 - %2 GB free)").arg(m_FileStorage).arg(storage.bytesTotal() / 1024 / 1024 / 1024 ), this, storage.bytesTotal() / 1024 / 1024 /1024 );
+    ValueBarStorage = new ValueBar( Qt::Horizontal, "Storage: (" + QString(" %1 - %2 GB free)").arg(m_FileStorage).arg(storage.bytesAvailable() / 1024 / 1024 / 1024 ), this, storage.bytesTotal() / 1024 / 1024 /1024 );
     ValueBarStorage->setFontSize(6);
 
     cpuLayout->addWidget( ValueBarCpu );
@@ -135,7 +136,7 @@ void Performance::MyTimerSlot()
      unsigned long long totalUser, totalUserLow, totalSys, totalIdle, total;
 
      file = fopen("/proc/stat", "r");
-     fscanf(file, "cpu %llu %llu %llu %llu", &totalUser, &totalUserLow, &totalSys, &totalIdle);
+     int ret = fscanf(file, "cpu %llu %llu %llu %llu", &totalUser, &totalUserLow, &totalSys, &totalIdle);
      fclose(file);
 
      if (totalUser < lastTotalUser || totalUserLow < lastTotalUserLow || totalSys < lastTotalSys || totalIdle < lastTotalIdle){
@@ -161,8 +162,8 @@ void Performance::MyTimerSlot()
      /* Memory */
 
      sysinfo(&memInfo);
-     m_memFree = memInfo.totalram - memInfo.freeram;
-     ValueBarMemory->setValue( m_memFree / ( 1024 * 1024 ) );
+     m_memFree = ((uint64_t) memInfo.freeram * memInfo.mem_unit ) / 1024;
+     ValueBarMemory->setValue( (uint64_t) m_memFree / 1024 );
 
 #endif
 

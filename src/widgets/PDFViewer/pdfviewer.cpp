@@ -321,7 +321,6 @@ void PDFViewer::on_cboSections_currentIndexChanged(const QString &arg1)
 
             item->setToolTip(fileName);
 
-            qDebug() << this->font();
             item->setFont( this->font() );
 
             ui->listWidgetTitels->addItem( item );
@@ -344,6 +343,8 @@ void PDFViewer::on_listWidgetTitels_itemClicked(QListWidgetItem *item)
     QDir        dir;
     QStringList arguments;
     QString     unpackpath = m_TempPath + "Unpacked/";
+
+    m_tools.createDir(unpackpath);
 
     QString     thumbs_path = m_LibraryPath + ui->cboSections->currentText() + "/thumbs";
 
@@ -383,7 +384,7 @@ void PDFViewer::on_listWidgetTitels_itemClicked(QListWidgetItem *item)
     basepath = m_LibraryPath + ui->cboSections->currentText() + "/";
     basename = basepath + basename;
 
-    dir.mkdir( QFileInfo(basename).path() );
+    m_tools.createDir( QFileInfo(basename).path() );
 
     qDebug() << "fileExists" << basename;
 
@@ -415,7 +416,7 @@ void PDFViewer::on_listWidgetTitels_itemClicked(QListWidgetItem *item)
                 QDir dir( unpackpath );
 
                 if ( ! dir.exists() ) {
-                    dir.mkdir( unpackpath );
+                    m_tools.createDir( unpackpath );
                 } else {
                     dir.setNameFilters(QStringList() << "*.*");
                     dir.setFilter( QDir::NoDotAndDotDot | QDir::Files );
