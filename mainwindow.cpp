@@ -122,6 +122,7 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
     m_beenden = false;
     m_actSelectionMode = 0;
     m_Item = nullptr;
+    m_proc = nullptr;
 
     splash->showMessage("clean temp directory... ");
 
@@ -3236,13 +3237,16 @@ void MainWindow::StartEmu() {
  *********************************************************************************************************************/
 void MainWindow::printOutput()
 {
-    QByteArray byteArray = m_proc->readAllStandardOutput();
+    if ( m_proc != nullptr ) {
 
-    m_stdOutLines.clear();
-    m_stdOutLines = QString(byteArray).split("\n");
+        QByteArray byteArray = m_proc->readAllStandardOutput();
 
-    foreach (QString line, m_stdOutLines){
-       qDebug() << "-I-" << line;
+        m_stdOutLines.clear();
+        m_stdOutLines = QString(byteArray).split("\n");
+
+        foreach (QString line, m_stdOutLines){
+           qDebug() << "-I-" << line;
+        }
     }
 }
 
@@ -3251,13 +3255,16 @@ void MainWindow::printOutput()
  *********************************************************************************************************************/
 void MainWindow::printError()
 {
-    QByteArray byteArray = m_proc->readAllStandardError();
+    if ( m_proc != nullptr ) {
 
-    m_stdErrLines.clear();
-    m_stdErrLines = QString(byteArray).split("\n");
+        QByteArray byteArray = m_proc->readAllStandardError();
 
-    foreach (QString line, m_stdErrLines){
-       qDebug() << "-E-" << line;
+        m_stdErrLines.clear();
+        m_stdErrLines = QString(byteArray).split("\n");
+
+        foreach (QString line, m_stdErrLines){
+           qDebug() << "-E-" << line;
+        }
     }
 }
 
@@ -3373,6 +3380,7 @@ bool MainWindow::ExecuteProgram(QString program, QStringList arguments, bool wai
             }
 
             delete m_proc;
+            m_proc = nullptr;
 
         } else {
 
@@ -3736,6 +3744,9 @@ void MainWindow::on_cboSystems_currentTextChanged(QString text) {
     fillSetNameListView(text, ui->chkLoadAll->isChecked());
 
     startupScripts = getStartups(text);
+    if ( startupScripts.isEmpty() ) {
+        m_tools.createDir(m_StartupsPath + "/" + m_CurrentSystem);
+    }
 
     ui->cboHtmlLinks->clear();
     ui->cboHtmlLinks->setVisible( false );
@@ -3749,11 +3760,8 @@ void MainWindow::on_cboSystems_currentTextChanged(QString text) {
     ui->cboStartups->addItems(startupScripts);
 
     if ( startupScripts.isEmpty() ) {
-
         setStartButtonMode(false);
-
     } else {
-
         setStartButtonMode(true);
     }
 
@@ -4294,9 +4302,9 @@ void MainWindow::handleToolBarSystem(QAction *action) {
 
     if ( ! program.isEmpty() ) {
         if ( param.isEmpty()) {
-            this->ExecuteProgram(program, QStringList(), true );
+            this->ExecuteProgram(program, QStringList(), false );
         } else {
-            this->ExecuteProgram(program, QStringList() << param.split(" "), true );
+            this->ExecuteProgram(program, QStringList() << param.split(" "), false );
         }
     }
 }
@@ -4349,6 +4357,8 @@ void MainWindow::iniToolBarSystem() {
     qSort(systems.begin(), systems.end(), caseInsensitiveLessThan);
 
     if ( !systems.isEmpty() ) {        
+
+        connect(Menu, SIGNAL(triggered(QAction*)), this, SLOT(handleToolBarSystem(QAction*)));
 
         foreach(QString system, systems) {
 
@@ -5574,6 +5584,8 @@ void MainWindow::on_actionThe_Mod_Archive_triggered()
  *********************************************************************************************************************/
 void MainWindow::on_edtSystems_clicked()
 {
+    QString filepath = m_StartupsPath + "/" + m_CurrentSystem;
+
     if ( ! ui->cboStartups->currentText().trimmed().isEmpty() ) {
 
         mMyCodeEditor = new CodeEditor(this, ui->cboStartups->currentText() );
@@ -5581,30 +5593,17 @@ void MainWindow::on_edtSystems_clicked()
 
     } else {
 
-        QMessageBox::information(this, this->windowTitle(),  tr("No startup file configured for ") + ui->cboSystems->currentText() );
+       bool ok;
+       // Ask for birth date as a string.
+       QString filename = QInputDialog::getText(nullptr, "No startup file configured for " + m_CurrentSystem,
+                                            "Please enter the filename:", QLineEdit::Normal,
+                                            "", &ok);
+       if (ok && !filename.isEmpty()) {
 
-        QString filepath = "../Startup/" + ui->cboSystems->currentText();
-        QString filename;
-        QDir    directory;
+           mMyCodeEditor = new CodeEditor(this, filepath + "/" + filename );
+           mMyCodeEditor->show();
+       }
 
-        if ( directory.mkpath( filepath ) ) {
-
-            bool ok;
-           // Ask for birth date as a string.
-           filename = QInputDialog::getText(nullptr, "Input dialog",
-                                                "Date of Birth:", QLineEdit::Normal,
-                                                "", &ok);
-           if (ok && !filename.isEmpty()) {
-
-               mMyCodeEditor = new CodeEditor(this, filepath + "/" + filename );
-               mMyCodeEditor->show();
-           }
-
-           QStringList startupScripts = getStartups(ui->cboSystems->currentText());
-
-           ui->cboStartups->clear();
-           ui->cboStartups->addItems(startupScripts);
-        }
     }
 }
 
