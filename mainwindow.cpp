@@ -3036,7 +3036,16 @@ QString MainWindow::getRomSetDiskFiles(QString RomSet) {
 
                 if ( files.count() > 0 ) {
 
-                    fileName = QDir::toNativeSeparators(files.at(0));
+                    QFileInfo fi(files.at(0));
+
+                    fileInfo.setFileName( files.at(0) );
+                    if ( ! fileInfo.rename( fi.absoluteDir().absolutePath() + "/" + rom.NAME) ) {
+                        qDebug() << "getRomSetDiskFiles" << "rename FAIL!" << files.at(0) << fi.absoluteDir().absolutePath() + "/" + rom.NAME;
+                    }
+
+                    fileName = rom.NAME;
+
+                    fileName = QDir::toNativeSeparators( fileName);
 
                     /*
                     if ( fileName.contains(",")) {
