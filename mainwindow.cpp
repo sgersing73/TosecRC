@@ -3047,23 +3047,6 @@ QString MainWindow::getRomSetDiskFiles(QString RomSet) {
 
                     fileName = QDir::toNativeSeparators( fileName);
 
-                    /*
-                    if ( fileName.contains(",")) {
-
-                        fileNameNew = fileName;
-                        //fileNameNew.replace(",", "_");
-
-                        fileInfo.setFileName( fileName );
-                        if ( fileInfo.copy ( fileNameNew ) ) {
-                            // qDebug() << "getRomSetDiskFiles" << "rename OK!" << fileName << fileNameNew;
-                        } else {
-                            //qDebug() << "getRomSetDiskFiles" << "rename FAIL!" << fileName << fileNameNew;
-                        }
-
-                        fileName = fileNameNew;
-                    }
-                    */
-
                     swapfiles = swapfiles + """" + fileName + """" + "|";
 
                     counter++;
