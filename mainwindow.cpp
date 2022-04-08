@@ -1,6 +1,9 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include <QtMultimedia/QAudioDeviceInfo>
+#include <QtMultimedia/QAudioInput>
+
 /** Cache for template files */
 TemplateCache         *templateCache;
 
@@ -181,6 +184,7 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
     scrollText->setSizePolicy(QSizePolicy::MinimumExpanding, QSizePolicy::MinimumExpanding);
     scrollText->setContentsMargins(0, 0, 0, 0);
     ui->toolNews->addWidget(scrollText);
+    ui->toolNews->setVisible(true);
 
     ui->cmdManuals->setVisible(false);
     ui->cmdSoundtrack->setVisible(false);
@@ -3950,6 +3954,7 @@ void MainWindow::ReleaseRomSet() {
 
     rom_type     rom;
     QVariantList values;
+    QStringList  members;
 
     if (ui->tableWidget->rowCount() == 0 ) {
         return;
@@ -3963,18 +3968,35 @@ void MainWindow::ReleaseRomSet() {
 
             if ( m_db.selectRomData( items[i]->toolTip().toInt(), rom ) ) {
 
-                values.clear();
+                members = rom.ROMSET.split(",");
+
+                for(int ii = 0; ii < members.count(); ii++) {
+
+                    if ( ! members[ii].isEmpty() ) {
+
+                        values.clear();
+                        values << " " << members[ii];
+
+                        if ( ! m_db.updateRomSet( values ) ) {
+                            qDebug() << "ReleaseRomSet error!!!";
+                            QMessageBox::information(this, this->windowTitle(),  tr("Romset release error!") );
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
+/*              values.clear();
                 values << rom.ROMSET;
 
                 if ( ! m_db.releaseRomSet( values ) ) {
 
                     qDebug() << "ReleaseRomSet error!!!";
                     QMessageBox::information(this, this->windowTitle(),  tr("Romset release error!") );
-                    return;
-                }
-            }
-        }
-    }
+                    return;                 
+              }
+*/
 
     QMessageBox::information(this, this->windowTitle(),  tr("Romset successfull released!") );
 }

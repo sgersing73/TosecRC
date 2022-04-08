@@ -96,8 +96,10 @@ unix{
   LIBS += -L/usr/local/lib -lVLCQtCore -lVLCQtWidgets
   LIBS += -lqscintilla2_qt5
 
+  LIBS += -lasound -lm -lstdc++ -lfftw3
+
   include(3dparty/QtDropbox2/qtdropbox2.pri)
-  
+
 }
 
 SOURCES += main.cpp\
@@ -109,6 +111,9 @@ SOURCES += main.cpp\
         src/modules/valuebar.cpp \
         src/modules/xml.cpp \
         src/widgets/AmigaFuture/amigafuture.cpp \
+    src/widgets/AudioSpectrum/audiosampler.cpp \
+    src/widgets/AudioSpectrum/audiospectrum.cpp \
+    src/widgets/AudioSpectrum/utils.cpp \
         src/widgets/Musik/musik.cpp \
         src/modules/norwegianwoodstyle.cpp \
         src/modules/bronzestyle.cpp \
@@ -164,6 +169,9 @@ SOURCES += main.cpp\
 HEADERS  += config.h \
         build_defs.h \
         src/widgets/AmigaFuture/amigafuture.h \
+        src/widgets/AudioSpectrum/audiosampler.h \
+        src/widgets/AudioSpectrum/audiospectrum.h \
+        src/widgets/AudioSpectrum/utils.h \
         src/widgets/ScrollText/scrolltext.h \
         src/widgets/SwitchButton/switchbutton.h \
         mainwindow.h \

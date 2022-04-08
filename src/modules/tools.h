@@ -1,6 +1,8 @@
 #ifndef TOOLS_H
 #define TOOLS_H
 
+#include "math.h"
+
 #include <QPixmap>
 #include <QDebug>
 #include <QDir>
@@ -35,6 +37,8 @@ public:
     void extractIcons(QString, bool);
 
     QString bytesHumanReadable(float);
+
+    float average_of_floats(const float* floats, int count);
 
     iconExtractor  m_iconExtractor;
 };

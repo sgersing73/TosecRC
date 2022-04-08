@@ -83,6 +83,8 @@ private slots:
 
     void saveFile();
 
+    void on_chkSpectrum_clicked(bool checked);
+
 private:
     Ui::Musik       *ui;
 

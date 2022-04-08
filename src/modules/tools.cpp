@@ -478,3 +478,13 @@ QString tools::bytesHumanReadable(float num)
     }
     return QString().setNum(num,'f',2)+" "+unit;
 }
+
+float tools::average_of_floats(const float* floats, int count)
+{
+    int i;
+    float total = 0.0;
+    for(i=0 ; i<count ; i++) {
+        total += fabs(floats[i]);
+    }
+    return total / count;
+}

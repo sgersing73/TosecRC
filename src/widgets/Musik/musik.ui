@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>230</width>
-    <height>194</height>
+    <width>326</width>
+    <height>210</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -42,6 +42,9 @@
       </sizepolicy>
      </property>
     </widget>
+   </item>
+   <item>
+    <widget class="AudioSpectrum" name="spectrum" native="true"/>
    </item>
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -214,6 +217,12 @@
    <class>VlcWidgetVolumeSlider</class>
    <extends>QWidget</extends>
    <header>VLCQtWidgets/WidgetVolumeSlider.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>AudioSpectrum</class>
+   <extends>QWidget</extends>
+   <header>src/widgets/AudioSpectrum/audiospectrum.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -1,4 +1,5 @@
 #include "musik.h"
+
 #include "ui_musik.h"
 
 /**********************************************************************************************************************
@@ -526,4 +527,9 @@ void Musik::saveFile()
             qDebug() << "-I- FileDownloader - file: " + m_fileName + " written...";
         }
     }
+}
+
+void Musik::on_chkSpectrum_clicked(bool checked)
+{
+
 }
