@@ -25,9 +25,7 @@ void AudioSpectrum::ShowContextMenu(const QPoint& pos) // this is a slot
     // QPoint globalPos = myWidget->viewport()->mapToGlobal(pos);
 
     QMenu myMenu;
-    myMenu.addAction("select color");
-    myMenu.addAction("enable");
-    myMenu.addAction("disable");
+    myMenu.addAction("set color");
     // ...
 
     QAction* selectedItem = myMenu.exec(globalPos);
@@ -36,21 +34,10 @@ void AudioSpectrum::ShowContextMenu(const QPoint& pos) // this is a slot
         return;
     }
 
-    if ( selectedItem->text().contains("select color") ) {
+    if ( selectedItem->text().contains("set color") ) {
 
         m_BarColor = QColorDialog::getColor(m_BarColor, this);
     }
-
-    if ( selectedItem->text().contains("enable") ) {
-
-        m_redrawTimer->start();
-    }
-
-    if ( selectedItem->text().contains("disable") ) {
-
-        m_redrawTimer->stop();
-    }
-
 }
 
 void AudioSpectrum::redrawTimerExpired()
