@@ -550,7 +550,7 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>only valid roms</string>
+                 <string>valids</string>
                 </property>
                </widget>
               </item>
@@ -563,7 +563,14 @@
                  </sizepolicy>
                 </property>
                 <property name="text">
-                 <string>only cue</string>
+                 <string>cue</string>
+                </property>
+               </widget>
+              </item>
+              <item>
+               <widget class="QCheckBox" name="chkOnlyMissing">
+                <property name="text">
+                 <string>missing</string>
                 </property>
                </widget>
               </item>

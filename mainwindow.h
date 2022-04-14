@@ -326,6 +326,8 @@ private slots:
 
     void on_edtBrowserUrl_returnPressed();
 
+    void on_chkOnlyMissing_clicked();
+
 private:
 
     Ui::MainWindow        *ui;

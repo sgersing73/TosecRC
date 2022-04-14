@@ -134,6 +134,7 @@ public:
     QHBoxLayout *horizontalLayout;
     QCheckBox *chkOnlyValid;
     QCheckBox *chkOnlyCue;
+    QCheckBox *chkOnlyMissing;
     QCheckBox *chkSystemSearch;
     QCheckBox *chkGamebase;
     QLabel *lblAnzRomInfo;
@@ -645,6 +646,11 @@ public:
 
         horizontalLayout->addWidget(chkOnlyCue);
 
+        chkOnlyMissing = new QCheckBox(gpSelection);
+        chkOnlyMissing->setObjectName(QString::fromUtf8("chkOnlyMissing"));
+
+        horizontalLayout->addWidget(chkOnlyMissing);
+
         chkSystemSearch = new QCheckBox(gpSelection);
         chkSystemSearch->setObjectName(QString::fromUtf8("chkSystemSearch"));
         sizePolicy5.setHeightForWidth(chkSystemSearch->sizePolicy().hasHeightForWidth());
@@ -1056,8 +1062,9 @@ public:
         cmdAll->setText(QApplication::translate("MainWindow", "all", nullptr));
         cmdAI->setText(QApplication::translate("MainWindow", "A-I", nullptr));
         cmdFavorite->setText(QString());
-        chkOnlyValid->setText(QApplication::translate("MainWindow", "only valid roms", nullptr));
-        chkOnlyCue->setText(QApplication::translate("MainWindow", "only cue", nullptr));
+        chkOnlyValid->setText(QApplication::translate("MainWindow", "valids", nullptr));
+        chkOnlyCue->setText(QApplication::translate("MainWindow", "cue", nullptr));
+        chkOnlyMissing->setText(QApplication::translate("MainWindow", "missing", nullptr));
         chkSystemSearch->setText(QApplication::translate("MainWindow", "system search", nullptr));
         chkGamebase->setText(QApplication::translate("MainWindow", "gamebase roms", nullptr));
         lblAnzRomInfo->setText(QApplication::translate("MainWindow", "no roms loaded...", nullptr));

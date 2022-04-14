@@ -47,7 +47,9 @@ void AudioSpectrum::redrawTimerExpired()
     m_AudioSampler->Update();
 
     if ( counter % 100 ) {
+
         this->m_AudioSampler->Analyze();
+
         update();
     }
 

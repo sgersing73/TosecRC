@@ -2428,6 +2428,7 @@ void MainWindow::loadRomList(QString RomSet) {
     QList<rom_type> software;
     bool validrom = false;
     bool validcue = false;
+    bool missingrom = false;
     gamebase_type  gamebase;
     QString info;
     QImage publisher;
@@ -2522,6 +2523,7 @@ void MainWindow::loadRomList(QString RomSet) {
     ui->tableWidgetInfo->setHorizontalHeaderItem(4,header4);
 
     int counter = 0;
+    int missing = 0;
 
     for (int i = 0; i < software.size(); ++i) {        
 
@@ -2533,6 +2535,7 @@ void MainWindow::loadRomList(QString RomSet) {
 
         validrom = false;
         validcue = false;
+        missingrom = false;
 
         info = "";
 
@@ -2548,6 +2551,10 @@ void MainWindow::loadRomList(QString RomSet) {
                     validrom = true;
                 }
             } else {
+
+                missing++;
+                missingrom=true;
+
                 item->setBackgroundColor( Qt::red );
             }
         } else {
@@ -2582,7 +2589,8 @@ void MainWindow::loadRomList(QString RomSet) {
         }
 
         if ( ( ( ui->chkOnlyValid->isChecked() && validrom ) || ( !ui->chkOnlyValid->isChecked() ) ) &&
-             ( ( ui->chkOnlyCue->isChecked() && validcue ) || ( !ui->chkOnlyCue->isChecked() ) )
+             ( ( ui->chkOnlyCue->isChecked() && validcue ) || ( !ui->chkOnlyCue->isChecked() ) ) &&
+             ( ( ui->chkOnlyMissing->isChecked() && missingrom ) || ( !ui->chkOnlyMissing->isChecked() ) )
            ) {
 
             ui->tableWidgetInfo->insertRow( counter );
@@ -2643,7 +2651,7 @@ void MainWindow::loadRomList(QString RomSet) {
     if ( ui->chkOnlyValid->isChecked() ) {
         ui->lblAnzRomInfo->setText( QString("%1 title loaded, %2 in storage").arg(ui->tableWidgetInfo->rowCount()).arg(inStorageCount) );
     } else {
-        ui->lblAnzRomInfo->setText( QString("%1 title loaded").arg(ui->tableWidgetInfo->rowCount() ) );
+        ui->lblAnzRomInfo->setText( QString("%1 title loaded, %2 missing files").arg(ui->tableWidgetInfo->rowCount() ).arg(missing) );
     }
 
     this->showMessage("");
@@ -4085,6 +4093,7 @@ void MainWindow::on_actionToggle_SID_Player_triggered()
         ui->lblMedia->setHidden(true);
 
     } else {
+        ui->widMP3->stopPlayer();
 
         ui->widSidPlayer->setHidden(true);
         ui->widMP3->setHidden( true );
@@ -4221,6 +4230,7 @@ void MainWindow::on_actionAmigaRemix_triggered()
         ui->lblMedia->setHidden(true);
 
     } else {
+        ui->widMP3->stopPlayer();
         ui->widMP3->setTitle("");
 
         ui->widAmigaRemix->setHidden( true );
@@ -5585,6 +5595,8 @@ void MainWindow::on_actionThe_Mod_Archive_triggered()
         ui->lblMedia->setHidden(true);
 
     } else {
+        ui->widMP3->stopPlayer();
+
         ui->widTheModArchive->setHidden( true );
         ui->widMP3->setHidden( true );
 
@@ -7916,4 +7928,9 @@ void MainWindow::on_edtBrowserUrl_returnPressed()
 
         this->loadWebView ( QUrl ( ui->edtBrowserUrl->text() ).toString(), false, true );
     }
+}
+
+void MainWindow::on_chkOnlyMissing_clicked()
+{
+    this->setCurrentItem( ui->listWidget->currentItem() );
 }
