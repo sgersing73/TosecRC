@@ -316,14 +316,19 @@ void Musik::stopPlayer() {
 void Musik::playFile() {
 
     bool local = true;
-    QString player;
+    QString player = "intern";
 
+    if ( ! _item ) {
+        return;
+    }
+
+    /*
     if ( ! _item ) {
         player = "intern";
     } else {
         player = getMediaPlayer ( _item->toolTip().mid( _item->toolTip().lastIndexOf(".") ) ) ;
     }
-
+*/
     if ( _item->toolTip().contains("http") ) {
         local = false;
     }
