@@ -210,12 +210,6 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
     // setup signal and slot
     connect(mLogFileTimer, SIGNAL(timeout()), this, SLOT(tailLogfile()));
 
-    // create a timer
-    mConnectionTimer = new QTimer(this);
-    // setup signal and slot
-    connect(mConnectionTimer, SIGNAL(timeout()), this, SLOT(checkConnection()));
-    mConnectionTimer->start(1000);
-
     // AmigeRemix initialisieren
     ui->widAmigaRemix->setHidden(true);
     ui->widAmigaRemix->setBaseUrl(_ARbaseUrl);
@@ -369,6 +363,13 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
     m_wwInternetLed->setShape( QwwLed::RectangularRaised );
     m_wwInternetLed->setChecked(true);
     ui->statusBar->addPermanentWidget( m_wwInternetLed );
+
+    // create a timer
+    mConnectionTimer = new QTimer(this);
+    // setup signal and slot
+    connect(mConnectionTimer, SIGNAL(timeout()), this, SLOT(checkConnection()));
+    mConnectionTimer->start(1000);
+
 
     QString picfilename = ":/images/images/tosec.png";
 
