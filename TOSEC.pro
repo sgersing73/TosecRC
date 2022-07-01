@@ -7,11 +7,18 @@ MAJOR = 1
 MINOR = 2
 VERSION_HEADER = version.h
 
-release: DESTDIR = /opt/Tosec
-debug:   DESTDIR = /opt/Tosec
-
 release: BUILDDIR = build/release
 debug:   BUILDDIR = build/debug
+
+linux {
+  release: DESTDIR = /opt/Tosec
+  debug:   DESTDIR = /opt/Tosec
+}
+
+win32 {
+  release: DESTDIR = T:/TosecRC
+  debug:   DESTDIR = T:/TosecRC
+}
 
 OBJECTS_DIR = $$BUILDDIR/.obj
 MOC_DIR = $$BUILDDIR/.moc

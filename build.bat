@@ -7,7 +7,7 @@ SET PATH=%QTDIR%\bin;%_ROOT%\Tools\mingw730_32\bin;%_ROOT%\Tools\QtCreator\bin;C
 
 set clean=false
 set mode=release
-set dest=B:\Tosec
+set dest=T:\Tosec
 
 REM TortoiseProc.exe /command:update /path:"T:\Build" /closeonend:1
 

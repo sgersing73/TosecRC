@@ -8,9 +8,11 @@
 
 #define STANDARD_WIDGET_SPACING (6)
 
+#ifdef linux
 #define ALSA_PCM_NEW_HW_PARAMS_API		// use new API
 #include <alsa/asoundlib.h>
 #include <fftw3.h>
+#endif
 
 class AudioSampler
 {
@@ -27,12 +29,15 @@ public:
     int GetMagnitudeCount();
 
 private:
-    unsigned int m_rate;
+
+#ifdef linux
     snd_pcm_uframes_t m_frame_size;
     snd_pcm_t* m_alsa;
-    float*  m_frame_buffer;
-
     fftw_plan m_fftw_plan;
+#endif
+
+    unsigned int m_rate;
+    float*  m_frame_buffer;
 
     double* m_sample_buffer_double_in;
     double* m_sample_buffer_double_out;

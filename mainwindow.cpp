@@ -133,6 +133,8 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
 
     splash->showMessage("open database...");
 
+    qDebug() << "open database...";
+
     //m_db.open_mysql("tosec", "tosec", "tosec");    
     if ( ! m_db.open_sqlite("tosec.db3") ) {
         qDebug() << "unable to open database!!!";
@@ -163,7 +165,7 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
         this, SLOT(ShowContextMenuRomInfo(const QPoint&)));
 
     ui->toolBar->setVisible(true);
-
+qDebug("1");
     ui->toolBarLinks->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->toolBarLinks, SIGNAL(customContextMenuRequested(const QPoint&)),
         this, SLOT(ShowContextMenuToolBarLinks(const QPoint&)));
@@ -185,7 +187,7 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
     scrollText->setContentsMargins(0, 0, 0, 0);
     ui->toolNews->addWidget(scrollText);
     ui->toolNews->setVisible(true);
-
+qDebug("1");
     ui->cmdManuals->setVisible(false);
     ui->cmdSoundtrack->setVisible(false);
     ui->cmdYoutubeVideo->setVisible(false);
@@ -2292,6 +2294,8 @@ bool MainWindow::clearDir( const QString path, bool secure, bool onlyTemp, QStri
             subDir.removeRecursively();
         }
     }
+
+    qDebug() << "cleanDir end...";
 
     return true;
 }

@@ -2,26 +2,31 @@
 #include "mainwindow.h"
 
 #include <complex.h>
-#include <fftw3.h>
 #include <math.h>
 #include "utils.h"
+
+#ifdef linux
+#include <fftw3.h>
 
 // ALSA audio
 #define ALSA_PCM_NEW_HW_PARAMS_API		// Use the newer ALSA API
 #include <alsa/asoundlib.h>
+#endif
 
 #define NUM_CHANNELS (1)
 #define DEFAULT_ALSA_DEVICE_NAME ("default")
 
 AudioSampler::AudioSampler()
 {
-    m_alsa = NULL;
+#ifdef linux
+    m_alsa = nullptr;
+    m_frame_size = 256;
+#endif
 
     m_rate = 44100;
-    m_frame_size = 256;
-    m_frame_buffer = NULL;
+    m_frame_buffer = nullptr;
 
-    m_bar_magnitudes = NULL;
+    m_bar_magnitudes = nullptr;
 
     m_overrun_count = 0;
     m_underrun_count = 0;
@@ -29,6 +34,8 @@ AudioSampler::AudioSampler()
 
 bool AudioSampler::Open(const char* alsa_device_name)
 {
+#ifdef linux
+
     int ret;
     int dir = 0;
 
@@ -78,6 +85,7 @@ bool AudioSampler::Open(const char* alsa_device_name)
     // Configure FFTW plan
     printf("Calculating FFT plan...\n");
     m_fftw_plan = fftw_plan_r2r_1d(m_frame_size, m_sample_buffer_double_in, m_sample_buffer_double_out, FFTW_REDFT00, FFTW_MEASURE);		// FFTW_HC2R  FFTW_DHT
+#endif
 
     return true;
 }
@@ -88,6 +96,7 @@ AudioSampler::~AudioSampler()
 
 bool AudioSampler::Update()
 {
+#ifdef linux
     int ret = snd_pcm_readi(m_alsa, m_frame_buffer, m_frame_size);
     if(ret == -EPIPE) {
         // EPIPE means overrun
@@ -104,11 +113,16 @@ bool AudioSampler::Update()
     else {
         return true;
     }
+#else
+    return true;
+#endif
 }
 
 void AudioSampler::Analyze()
 {
     int i;
+
+#ifdef linux
 
     // Copy float->double for FFTW
     for (i=0 ; i<m_frame_size ; i++) {
@@ -128,6 +142,11 @@ void AudioSampler::Analyze()
     for(i=0 ; i<NUM_BARS ; i++) {
         m_bar_magnitudes[i] = 0.18 * log(average_of_floats(&m_frame_buffer[i * samples_per_bar], samples_per_bar));
     }
+#else
+    for(i=0 ; i<NUM_BARS ; i++) {
+        m_bar_magnitudes[i] = 0;
+    }
+#endif
 }
 
 float* AudioSampler::GetMagnitudeArray()

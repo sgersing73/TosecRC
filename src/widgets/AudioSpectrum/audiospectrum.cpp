@@ -2,10 +2,11 @@
 
 AudioSpectrum::AudioSpectrum(QWidget *parent) : QWidget(parent), m_redrawTimer(new QTimer(this))
 {
+#ifdef linux
     m_BarColor = Qt::white;
 
     m_AudioSampler = new AudioSampler();
-    m_AudioSampler->Open(NULL);		// NULL = default device (runtime-changeable in pavucontrol app)
+    m_AudioSampler->Open(nullptr);		// NULL = default device (runtime-changeable in pavucontrol app)
 
     this->setMinimumHeight(40);
 
@@ -15,10 +16,12 @@ AudioSpectrum::AudioSpectrum(QWidget *parent) : QWidget(parent), m_redrawTimer(n
 
     connect(m_redrawTimer, SIGNAL(timeout()), this, SLOT(redrawTimerExpired()));
     m_redrawTimer->start(1);
+#endif
 }
 
 void AudioSpectrum::ShowContextMenu(const QPoint& pos) // this is a slot
 {
+#ifdef linux
     // for most widgets
     QPoint globalPos = this->mapToGlobal(pos);
     // for QAbstractScrollArea and derived classes you would use:
@@ -38,10 +41,12 @@ void AudioSpectrum::ShowContextMenu(const QPoint& pos) // this is a slot
 
         m_BarColor = QColorDialog::getColor(m_BarColor, this);
     }
+#endif
 }
 
 void AudioSpectrum::redrawTimerExpired()
 {
+#ifdef linux
     static int counter = 0;
 
     m_AudioSampler->Update();
@@ -54,10 +59,12 @@ void AudioSpectrum::redrawTimerExpired()
     }
 
     counter++;
+#endif
 }
 
 void AudioSpectrum::paintEvent(QPaintEvent *event)
 {
+#ifdef linux
     Q_UNUSED(event)
 
     QPainter painter(this);
@@ -134,4 +141,5 @@ void AudioSpectrum::paintEvent(QPaintEvent *event)
 
         }
     }
+#endif
 }
