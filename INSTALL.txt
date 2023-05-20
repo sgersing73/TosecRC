@@ -11,7 +11,8 @@ sudo apt install git cmake subversion qtcreator
 sudo apt install qttools5-dev-tools qt5-doc qtmultimedia5-dev qtdeclarative5-dev libqt5xmlpatterns5-dev
 sudo apt install qtbase5-examples qtbase5-doc-html qt5-image-formats-plugins
 sudo apt install libvlccore-dev libvlc-dev
-sudo apt install thunar-vcs-plugin
+sudo apt install libfftw3-dev
+sudo apt install p7zip p7zip-full p7zip-rar
 
 sudo apt install libgl1-mesa-dev mesa-common-dev
 
@@ -22,17 +23,19 @@ sudo apt install libquazip5-dev
 sudo apt install libqwt-qt5-dev
 sudo apt install libpoppler-qt5-dev
 
-sudo apt install vlc wget sqlitebrowser python
+sudo apt install vlc wget sqlitebrowser python3
 
 /* Youtube-dl*/
 
 sudo wget https://yt-dl.org/downloads/latest/youtube-dl -O /usr/local/bin/youtube-dl
 sudo chmod a+rx /usr/local/bin/youtube-dl
+sudo ln -s /usr/bin/python3 /usr/local/bin/python
 
 /* AES encrypt the rom files */
 
 wget https://www.aescrypt.com/download/v3/linux/aescrypt-3.16.tgz
 tar zxvf aescrypt-3.16.tgz 
+cd aescrypt-3.16
 make
 make test
 sudo make install 
@@ -47,7 +50,7 @@ qmake
 make
 sudo make install
 
-git clone git://github.com/vlc-qt/vlc-qt.git
+git clone https://github.com/vlc-qt/vlc-qt.git
 cd vlc-qt
 mkdir build
 cd build
@@ -63,3 +66,5 @@ cd ..
 cd ..
 qmake
 make
+
+cp *.ini /opt/Tosec/
