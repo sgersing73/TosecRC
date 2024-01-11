@@ -1,9 +1,6 @@
 ﻿#include "mainwindow.h"
 #include "ui_mainwindow.h"
 
-#include <QtMultimedia/QAudioDeviceInfo>
-#include <QtMultimedia/QAudioInput>
-
 /** Cache for template files */
 TemplateCache         *templateCache;
 
@@ -415,7 +412,7 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
 
  #ifdef _WIN32x
     QString fn;
-    fn = this->downloadFile(QUrl("https://youtube-dl.org/downloads/latest/youtube-dl.exe"), "", m_CachePath, true) ;
+    fn = this->downloadFile(QUrl("https://github.com/yt-dlp/yt-dlp/releases/download/2023.12.30/yt-dlp.exe"), "", m_CachePath, true) ;
     if ( ! fn.isEmpty() ) {
         qDebug() << "set Youtube-dl" << fn;
         m_settings.saveStringSetting(m_sSettingsFile, "Executables", "Youtube-dl", fn);
@@ -3136,7 +3133,7 @@ bool MainWindow::checkFileInCache(QString filename) {
  *********************************************************************************************************************/
 void MainWindow::StartEmu() {
 
-    QString     program = "AutoIt3.exe";
+    QString     program = "interpreter";
     QString     script;
     QStringList arguments;
     QStringList files;
@@ -3464,7 +3461,7 @@ void MainWindow::getDiskInfo() {
 
         // D64, D71, D81, X64 and G64
         if ( fi.completeSuffix().contains( QRegExp("d64|D64|d71|D71|d81|D81|x64|X64|g64|G64") ) )  {
-            program = "c1541.exe";
+            program = "c1541";
             arguments << "-attach" << QDir::toNativeSeparators(files.at(i)) << "-dir";
             validfilefound = true;
         }
@@ -3474,7 +3471,7 @@ void MainWindow::getDiskInfo() {
             //program = "../Tools/adfchk/bin_win32/adfchk.exe";
             //arguments << "-f" << QDir::toNativeSeparators(files.at(i)) << "-b";
 
-            program = "dynunadf.exe";
+            program = "dynunadf";
             arguments << "-l" << QDir::toNativeSeparators(files.at(i));
 
             validfilefound = true;
@@ -3582,7 +3579,7 @@ void MainWindow::getAmiKickRomInfo() {
         QFileInfo fi( files.at(i) );
 
         if ( fi.completeSuffix().contains(  QRegExp("rom|ROM") ) )  {
-            program = "AmiKick.exe";
+            program = "amikick";
             param << files.at(i);
             validfilefound = true;
         }
@@ -6243,7 +6240,7 @@ void MainWindow::GetYoutubeInformations(QUrl iUrl) {
  *********************************************************************************************************************/
 QString MainWindow::GetYoutubeVideoUrl(QUrl iUrl) {
 
-    QString program = "Youtube-dl";
+    QString program = "yt-dlp";
     QString url;
     QStringList args;
 
@@ -6263,7 +6260,7 @@ QString MainWindow::GetYoutubeVideoUrl(QUrl iUrl) {
  *********************************************************************************************************************/
 QString MainWindow::GetYoutubeVideoTitle(QUrl iUrl) {
 
-    QString program = "Youtube-dl";
+    QString program = "yt-dlp";
     QString title;
     QStringList args;
 
@@ -6283,7 +6280,7 @@ QString MainWindow::GetYoutubeVideoTitle(QUrl iUrl) {
  *********************************************************************************************************************/
 QString MainWindow::GetYoutubeVideoThumbnail(QUrl iUrl, QString iFileName) {
 
-    QString program = "Youtube-dl";
+    QString program = "yt-dlp";
     QString thumb;
     QStringList args;
 
@@ -6828,7 +6825,7 @@ QString MainWindow::downloadFile(QUrl iUrl, QString fileName, QString iDest, boo
         return "";
     }
 
-    QString program = "wget.exe";
+    QString program = "wget";
     QString destFileName;
     QString output;
     QStringList args;
@@ -7650,7 +7647,7 @@ void MainWindow::getHexEditor() {
 
     for (int i = 0; i < files.size(); ++i) {
 
-        program = "HexEdit.exe";
+        program = "hexedit";
         param << files.at(i);
         validfilefound = true;
     }

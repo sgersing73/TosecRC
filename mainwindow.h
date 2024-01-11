@@ -37,6 +37,9 @@
 #include <QXmlNodeModelIndex>
 #include <QCryptographicHash>
 
+#include <QtMultimedia/QAudioDeviceInfo>
+#include <QtMultimedia/QAudioInput>
+
 #include "qwwled/qwwled.h"
 
 #ifdef _WIN32
