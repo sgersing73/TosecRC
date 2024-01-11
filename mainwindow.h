@@ -144,6 +144,9 @@ public:
     void initLinkMenu();
     bool currentConnectivityStatus();
     void initToolsMenu();
+    void createQtActions();
+    void about();
+    void license();
 
     void hoverEnter(QHoverEvent *);
     void hoverLeave(QHoverEvent *);

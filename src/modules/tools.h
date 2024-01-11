@@ -34,7 +34,7 @@ public:
 
     bool systemShutdown();
 
-    void extractIcons(QString, bool);
+    void extractIcons(QString, QString, bool);
 
     QString bytesHumanReadable(float);
 

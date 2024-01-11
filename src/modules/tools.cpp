@@ -406,13 +406,13 @@ bool tools::fileCopy(QString source, QString dest) {
     return(retVal);
 }
 
-void tools::extractIcons(QString filename, bool large) {
+void tools::extractIcons(QString storage, QString filename, bool large) {
 
 #ifdef WIN32
     PixmapEntryList pixmaps = m_iconExtractor.extractIcons(filename, large);
 
     for (const auto &entry : pixmaps) {
-        const QString fileName = "T:/Cache/Icons/" + entry.name + QLatin1String(".png");
+        const QString fileName = storage + "/Icons/" + entry.name + QLatin1String(".png");
         if (!entry.pixmap.save(fileName)) {
             qDebug() << "Error writing image file " << fileName;
         }

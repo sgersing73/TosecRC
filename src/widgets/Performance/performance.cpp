@@ -61,7 +61,7 @@ Performance::Performance(QWidget *parent) :
     memInfo.dwLength = sizeof(MEMORYSTATUSEX);
     GlobalMemoryStatusEx(&memInfo);
 
-    memTotalPhys = memInfo.ullTotalPhys;    
+    memTotalPhys = memInfo.ullTotalPhys;
 #endif
 
 #ifdef linux
@@ -87,10 +87,10 @@ Performance::Performance(QWidget *parent) :
     ValueBarCpu = new ValueBar( Qt::Horizontal, "CPU: (" + QString("%1").arg(numOfProcessors) + " Cores)", this, 100 );
     ValueBarCpu->setFontSize(6);
 
-    ValueBarMemory = new ValueBar( Qt::Horizontal, "RAM: (" + QString("%1").arg(memTotalPhys / ( 1024 * 1024 ) ) + " MB)", this, (uint64_t) memTotalPhys / 1024 );
+    ValueBarMemory = new ValueBar( Qt::Horizontal, "RAM: (" + QString("%1").arg((uint64_t)(memTotalPhys / ( 1024 * 1024 )) ) + " MB)", this, (uint64_t)(memTotalPhys / ( 1024 * 1024 ) ) ) ;
     ValueBarMemory->setFontSize(6);
 
-    ValueBarStorage = new ValueBar( Qt::Horizontal, "Storage: (" + QString(" %1 - %2 GB free)").arg(m_FileStorage).arg(storage.bytesAvailable() / 1024 / 1024 / 1024 ), this, storage.bytesTotal() / 1024 / 1024 /1024 );
+    ValueBarStorage = new ValueBar( Qt::Horizontal, "Storage: (" + QString(" %1 - %2/%3 GB free/total)").arg(m_FileStorage).arg(storage.bytesAvailable() / 1024 / 1024 / 1024 ).arg(storage.bytesTotal() / 1024 / 1024 /1024), this, storage.bytesTotal() / 1024 / 1024 /1024 );
     ValueBarStorage->setFontSize(6);
 
     cpuLayout->addWidget( ValueBarCpu );
@@ -123,7 +123,7 @@ void Performance::MyTimerSlot()
     PdhGetFormattedCounterValue(m_cpuTotal, PDH_FMT_DOUBLE, nullptr, &counterVal);
     ValueBarCpu->setValue( counterVal.doubleValue );
 
-    PdhGetFormattedCounterValue(m_memFree, PDH_FMT_DOUBLE, nullptr, &counterVal);
+    PdhGetFormattedCounterValue(m_memFree, PDH_FMT_DOUBLE, nullptr, &counterVal);   
     ValueBarMemory->setValue( counterVal.doubleValue );
 
 #endif

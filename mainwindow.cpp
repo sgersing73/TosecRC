@@ -135,7 +135,6 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
 
     qDebug() << "open database...";
 
-    //m_db.open_mysql("tosec", "tosec", "tosec");    
     if ( ! m_db.open_sqlite("tosec.db3") ) {
         qDebug() << "unable to open database!!!";
         exit(0);
@@ -165,7 +164,7 @@ MainWindow::MainWindow(QWidget *parent, QSplashScreen *splash) :
         this, SLOT(ShowContextMenuRomInfo(const QPoint&)));
 
     ui->toolBar->setVisible(true);
-qDebug("1");
+
     ui->toolBarLinks->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->toolBarLinks, SIGNAL(customContextMenuRequested(const QPoint&)),
         this, SLOT(ShowContextMenuToolBarLinks(const QPoint&)));
@@ -187,7 +186,7 @@ qDebug("1");
     scrollText->setContentsMargins(0, 0, 0, 0);
     ui->toolNews->addWidget(scrollText);
     ui->toolNews->setVisible(true);
-qDebug("1");
+
     ui->cmdManuals->setVisible(false);
     ui->cmdSoundtrack->setVisible(false);
     ui->cmdYoutubeVideo->setVisible(false);
@@ -372,7 +371,6 @@ qDebug("1");
     connect(mConnectionTimer, SIGNAL(timeout()), this, SLOT(checkConnection()));
     mConnectionTimer->start(1000);
 
-
     QString picfilename = ":/images/images/tosec.png";
 
     QImage publisher;
@@ -411,9 +409,11 @@ qDebug("1");
     this->iniToolBarLinks();
     this->iniToolBarYoutube();
 
+    this->createQtActions();
+
     setStartButtonMode(false);
 
- #ifdef _WIN32
+ #ifdef _WIN32x
     QString fn;
     fn = this->downloadFile(QUrl("https://youtube-dl.org/downloads/latest/youtube-dl.exe"), "", m_CachePath, true) ;
     if ( ! fn.isEmpty() ) {
@@ -421,12 +421,6 @@ qDebug("1");
         m_settings.saveStringSetting(m_sSettingsFile, "Executables", "Youtube-dl", fn);
     }
 #endif
-
-    /*
-    SwitchButton* sbtn = new SwitchButton(this); // Default style is Style::ONOFF
-    bool current = sbtn->value();
-    sbtn->setValue(!current);
-    */
 }
 
 void MainWindow::hoverEnter(QHoverEvent * event) {
@@ -503,12 +497,14 @@ void MainWindow::initYoutubeMenu() {
 void MainWindow::initToolsMenu() {
 
     QStringList channels = m_settings.GetAllKeys("tools.ini", "Global");
+    QString program;
+
     QMenu *Menu;
 
     QList<QMenu*> menus = menuBar()->findChildren<QMenu*>();
 
     foreach( QMenu* item, menus )
-    {
+    { 
         if (item->title().contains("Tools")) {
 
             item->clear();
@@ -523,7 +519,15 @@ void MainWindow::initToolsMenu() {
 
         for (int i = 0; i < channels.size(); ++i) {
 
-            QAction *action = new QAction( channels.at(i), nullptr);
+            program = m_settings.loadStringSetting("tools.ini", "Global", channels.at(i));
+
+            QAction *action;
+
+            if ( program.contains(";") ) {
+                action = new QAction( QIcon( program.split(";").at(1) ), channels.at(i));
+            } else {
+                action = new QAction( channels.at(i), nullptr);
+            }
 
             Menu->addAction(action);
         }
@@ -682,6 +686,8 @@ void MainWindow::dropEvent(QDropEvent *ev)
             qDebug() << url.toString();
 
         }
+
+        this->initLinkMenu();
     }
 }
 
@@ -1838,7 +1844,6 @@ void MainWindow::findRomFiles(QFile *file, bool verify) {
     bool         doEncryption = false;
     QFileInfo    fi;
     QStringList  param;
-    bool         fileIsEncrypted = false;
     QFile        scrFileName;
     QString      checksum;
     QStringList  fileParts;
@@ -1903,7 +1908,7 @@ void MainWindow::findRomFiles(QFile *file, bool verify) {
         }
     }
 
-    SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... roms found: " +  QString("%1").arg(romfound), true );
+    SetStatusBar(0, filecnt, loopcnt,  tr("processing %1").arg(filecnt) + tr(" files... roms found: %1").arg(romfound), true );
 
     QDirIterator it2(file->fileName(), QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot, QDirIterator::Subdirectories);
 
@@ -1911,7 +1916,7 @@ void MainWindow::findRomFiles(QFile *file, bool verify) {
 
         filename = it2.next();
 
-        SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... roms found: " +  QString("%1").arg(romfound), false );
+        SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... roms found: " +  QString("%1").arg(romfound+1), false );
 
         this->showMessage("process: " + filename + " with size " + QString("%1 MB").arg(it2.fileInfo().size() /1024 /1024) );
 
@@ -1934,11 +1939,7 @@ void MainWindow::findRomFiles(QFile *file, bool verify) {
 
             if ( ( it2.fileInfo().suffix() == "zip" ) || (it2.fileInfo().suffix() == "aes") ) {
 
-                fileIsEncrypted = false;
-
                 if ( it2.fileInfo().suffix() == "aes" ) {
-
-                    fileIsEncrypted = true;
 
                     param.clear();
                     param << "-d" << "-p" << AesKey << filename;
@@ -2022,8 +2023,6 @@ void MainWindow::findRomFiles(QFile *file, bool verify) {
 
                     if ( autoImport ) {
 
-                        QFileInfo info = files.at(i);
-
                         fileParts = filename.split("/");
 
                         QFileInfo fi(files.at(i));
@@ -2062,7 +2061,6 @@ void MainWindow::findRomFiles(QFile *file, bool verify) {
 
                         qDebug() << "-I- TOSEC data found...";
 
-                        //storePath = m_FileStorage + rom.SYSTEM + "/" + rom.SETNAME;
                         storePath = m_FileStorage + rom.SYSTEM ;
                         newfilename = QDir::toNativeSeparators(storePath + "/" + rom.SHA + ".zip");
 
@@ -2797,6 +2795,8 @@ void MainWindow::loadSettings() {
     _FTextension = m_settings.loadStringSetting(m_sSettingsFile, "Flashtro", "ext");
 
     m_schema = m_settings.loadStringSetting(m_sSettingsFile, "General", "IconColorSchema", "blue");
+
+    this->initToolsMenu();
 }
 
 /**********************************************************************************************************************
@@ -3060,7 +3060,7 @@ QString MainWindow::getRomSetDiskFiles(QString RomSet) {
                         qDebug() << "getRomSetDiskFiles" << "rename FAIL!" << files.at(0) << fi.absoluteDir().absolutePath() + "/" + rom.NAME;
                     }
 
-                    fileName = rom.NAME;
+                    fileName = fi.absoluteDir().absolutePath() + "/" + rom.NAME;
 
                     fileName = QDir::toNativeSeparators( fileName);
 
@@ -3079,9 +3079,9 @@ QString MainWindow::getRomSetDiskFiles(QString RomSet) {
         }
     }
 
-    qDebug() << swapfiles;
+    qDebug() << "Swapfiles" << swapfiles;
 
-   this->showMessage(" ");
+    this->showMessage(" ");
 
     return swapfiles;
 }
@@ -3328,7 +3328,8 @@ bool MainWindow::ExecuteProgram(QString program, QStringList arguments, bool wai
 
     QFileInfo fi( QDir::toNativeSeparators(program) );
 
-    //@@@m_tools.extractIcons( program, true ) ;
+    qDebug() << "call" << "extractIcons";
+    m_tools.extractIcons( m_CachePath, program, true ) ;
 
     m_proc->setWorkingDirectory(fi.absolutePath());
     m_proc->setProcessChannelMode(QProcess::SeparateChannels);
@@ -4615,7 +4616,7 @@ void MainWindow::on_actionVerifyRomStore_triggered()
 
         QFile file;
 
-        file.setFileName( m_FileStorage + "/" + ui->cboSystems->currentText() );
+        file.setFileName( m_FileStorage + ui->cboSystems->currentText() );
 
         if(file.exists()) {
 
@@ -4623,7 +4624,7 @@ void MainWindow::on_actionVerifyRomStore_triggered()
 
             findRomFiles(&file, true);
         } else {
-            qDebug() << "-E- Directory not found... " + file.fileName();
+            QMessageBox::warning(this, this->windowTitle(),  tr("Directory not found... ") + file.fileName() );
         }
 
         file.close();
@@ -5443,10 +5444,6 @@ void MainWindow::loadSystemList()
     ui->tableWidgetInfo->resizeColumnsToContents();   
     ui->tableWidgetInfo->resizeRowsToContents();
 
- //   QSettings settings("state.ini", QSettings::IniFormat);
- //   QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
- //   ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
-
     this->showMessage("");
 
     QApplication::restoreOverrideCursor();
@@ -5803,10 +5800,6 @@ void MainWindow::loadSystemCounter()
     ui->tableWidgetInfo->resizeColumnsToContents();
     ui->tableWidgetInfo->resizeRowsToContents();
 
-   // QSettings settings("state.ini", QSettings::IniFormat);
-   // QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
-   // ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
-
     this->showMessage("");
 
     QApplication::restoreOverrideCursor();
@@ -5981,12 +5974,9 @@ void MainWindow::verifyTosecDB() {
                             finfo.setFileName( tosecs.at(i).PATH );
                             finfo.remove();
                         }
-
                         clearDir(m_TempPath);
                     }
-
                 }
-
             } else {
 
                 if ( deepAnalyse ) {
@@ -6023,7 +6013,6 @@ void MainWindow::verifyTosecDB() {
             }
         } else {
 
-            //const QString storePath = m_FileStorage + tosecs.at(i).SYSTEM + "/" + tosecs.at(i).SETNAME + "/" + tosecs.at(i).SHA + ".zip" ;
             const QString storePath = m_FileStorage + tosecs.at(i).SYSTEM + "/" + tosecs.at(i).SHA + ".zip" ;
 
             if ( m_tools.fileExists( storePath ) ||
@@ -6040,10 +6029,6 @@ void MainWindow::verifyTosecDB() {
     ui->tableWidgetInfo->resizeColumnsToContents();
     ui->tableWidgetInfo->resizeRowsToContents();
 
-   // QSettings settings("state.ini", QSettings::IniFormat);
-   // QByteArray MyArray = settings.value(QString("mainTableWidth%1").arg(m_GridMode), "").toByteArray();
-   // ui->tableWidgetInfo->horizontalHeader()->restoreState(MyArray);
-
     this->clearDir(m_CachePath, false, false, ui->cboSystems->currentText() + ".cache");
     this->clearDir(m_CachePath, false, false, "Systems.cache");
 
@@ -6058,7 +6043,6 @@ void MainWindow::verifyTosecDB() {
     }
 
     on_cboSystems_currentTextChanged(ui->cboSystems->currentText());
-
 }
 
 /**********************************************************************************************************************
@@ -6414,13 +6398,17 @@ void MainWindow::on_actionLockStorage_triggered()
     QString AesKey = m_settings.loadStringSetting(m_sSettingsFile, "AES", "key");
     QString AesTool = m_settings.loadStringSetting(m_sSettingsFile, "AES", "tool");
 
-    if ( AesKey.isEmpty() ) {
-
+    if ( AesKey.isEmpty() || AesTool.isEmpty() ) {
       QMessageBox::information(this, this->windowTitle(),  tr("AES Tools not correctly configured!!!") );
       return;
     }
 
-    QFile file(QFileDialog::getExistingDirectory(this, "Open"));
+    QString directory = QFileDialog::getExistingDirectory(this, "Please select the directory with unencrypted files...");
+    if ( directory.isEmpty() ) {
+        return;
+    }
+
+    QFile file(directory);
 
     if ( file.exists() ) {
 
@@ -6436,7 +6424,7 @@ void MainWindow::on_actionLockStorage_triggered()
 
             if ( it2.fileInfo().isFile() ) {
 
-                SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... processed: " +  QString("%1").arg(loopcnt), ( loopcnt==0?true:false ) );
+                SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... processed: " +  QString("%1").arg(loopcnt+1), ( loopcnt==0?true:false ) );
 
                 if ( it2.fileInfo().suffix() != "aes" ) {
 
@@ -6468,12 +6456,9 @@ void MainWindow::on_actionLockStorage_triggered()
 
         QApplication::restoreOverrideCursor();
 
-        QMessageBox::information(this, this->windowTitle(),  tr("AES encryption done!!!") );
-
-        file.close();
+        ResetStatusBar();
     }
-
-    ResetStatusBar();
+    QMessageBox::information(this, this->windowTitle(),  tr("AES encryption done!!!") );
 }
 
 /**********************************************************************************************************************
@@ -6490,16 +6475,17 @@ void MainWindow::on_actionUnlockStorage_triggered()
     QString AesKey = m_settings.loadStringSetting(m_sSettingsFile, "AES", "key");
     QString AesTool = m_settings.loadStringSetting(m_sSettingsFile, "AES", "tool");
 
-    QByteArray sourcefile;
-    QByteArray destfile;
-    QByteArray key = AesKey.toUtf8();
-
-    if ( AesKey.isEmpty() ) {
+    if ( AesKey.isEmpty() || AesTool.isEmpty() ) {
       QMessageBox::information(this, this->windowTitle(),  tr("AES Tools not correctly configured!!!") );
       return;
     }
 
-    QFile file(QFileDialog::getExistingDirectory(this, "Open"));
+    QString directory = QFileDialog::getExistingDirectory(this, "Please select the directory with encrypted files...");
+    if ( directory.isEmpty() ) {
+        return;
+    }
+
+    QFile file(directory);
 
     if( file.exists() ) {
 
@@ -6515,7 +6501,7 @@ void MainWindow::on_actionUnlockStorage_triggered()
 
             if ( it2.fileInfo().isFile() ) {
 
-                SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... processed: " +  QString("%1").arg(loopcnt), ( loopcnt==0?true:false ) );
+                SetStatusBar(0, filecnt, loopcnt,  "processing " + QString("%1").arg(filecnt) + " files... processed: " +  QString("%1").arg(loopcnt+1), ( loopcnt==0?true:false ) );
 
                 if ( it2.fileInfo().suffix().contains("aes") ) {
 
@@ -6536,7 +6522,6 @@ void MainWindow::on_actionUnlockStorage_triggered()
                     } else {
                         m_beenden = true;
                     }
-
                 } else {
                     // qDebug() << filename << "alredy decrypted...";
                 }
@@ -6547,12 +6532,10 @@ void MainWindow::on_actionUnlockStorage_triggered()
 
         QApplication::restoreOverrideCursor();
 
-        QMessageBox::information(this, this->windowTitle(),  tr("AES decryption done!!!") );
-
-        file.close();
+        ResetStatusBar();
     }
 
-    ResetStatusBar();
+    QMessageBox::information(this, this->windowTitle(), tr("AES decryption done!!!") );
 }
 
 /**********************************************************************************************************************
@@ -6958,6 +6941,10 @@ void MainWindow::on_cmdExtract_clicked()
     QFileInfo   dest;
     QFileInfo   fi;
 
+    QString AesKey = m_settings.loadStringSetting(m_sSettingsFile, "AES", "key");
+    QString AesTool = m_settings.loadStringSetting(m_sSettingsFile, "AES", "tool");
+
+
     if ( ui->tableWidget->rowCount() == 0 ) {
         return;
     }
@@ -6999,9 +6986,6 @@ void MainWindow::on_cmdExtract_clicked()
                 return;
             } else {
 
-                QString AesKey = m_settings.loadStringSetting(m_sSettingsFile, "AES", "key");
-                QString AesTool = m_settings.loadStringSetting(m_sSettingsFile, "AES", "tool");
-
                 if ( AesKey.isEmpty() ) {
 
                     QMessageBox::information(this, this->windowTitle(),  tr("AES Tools not correctly configured!!!") );
@@ -7037,35 +7021,38 @@ void MainWindow::on_cmdExtract_clicked()
 
     if ( ! files.isEmpty() ){
 
-        QString childes = this->getRomSetDiskFiles(r->text());
-        if ( ! childes.isEmpty() ) {
-            files.append(childes.split("|"));
+        QString children = this->getRomSetDiskFiles(r->text());
+        if ( ! children.isEmpty() ) {
+            files.append(children.split("|"));
         }
 
-        qDebug() << files;
+        qDebug() << "getRomSetDiskFiles" << files;
 
         if ( ! destDir.isEmpty() ) {
 
             foreach (const QString &str, files) {
 
-                src = str;
-                dest = destDir + "/" + src.fileName();
+                if ( !str.isEmpty() ) {
 
-                qDebug() << "Source: " << src.absoluteFilePath();
-                qDebug() << "Dest: " << dest.absoluteFilePath();
+                    src = str;
+                    dest = destDir + "/" + src.fileName();
 
-                if ( ! dest.exists() && src.isFile() ) {
+                    qDebug() << "Source: " << src.absoluteFilePath();
+                    qDebug() << "Dest: " << dest.absoluteFilePath();
 
-                    if ( ! ( QFile::copy(str, dest.absoluteFilePath() ) ) ) {
-                        qDebug() << "Image copy error!" << str <<  dest.absoluteFilePath();
-                    } else {
-                        qDebug() << "FileCopy OK!";
+                    if ( ! dest.exists() && src.isFile() ) {
+
+                        if ( ! ( QFile::copy(str, dest.absoluteFilePath() ) ) ) {
+                            qDebug() << "Image copy error!" << str <<  dest.absoluteFilePath();
+                        } else {
+                            qDebug() << "FileCopy OK!";
+                        }
                     }
                 }
             }
         }
 
-        QMessageBox::information(this, this->windowTitle(),  tr("%1\n\nprepared in folder %2").arg(n->text()).arg(destDir) );
+        QMessageBox::information(this, this->windowTitle(), tr("%1\n\nprepared in folder %2").arg(n->text()).arg(destDir) );
     }
 }
 
@@ -7261,7 +7248,7 @@ void MainWindow::on_chkTailLog_clicked(bool checked)
 
 void MainWindow::tailLogfile() {
 
-    QFile file("TosecRC.log");
+    QFile file(QString("TosecRC_%1.log").arg(QDateTime::currentDateTime().toString("yyyyMMdd")));
 
     if(file.open(QIODevice::ReadOnly)) {
 
@@ -7938,4 +7925,95 @@ void MainWindow::on_edtBrowserUrl_returnPressed()
 void MainWindow::on_chkOnlyMissing_clicked()
 {
     this->setCurrentItem( ui->listWidget->currentItem() );
+}
+
+void MainWindow::createQtActions() {
+
+     QMenu *helpMenu = menuBar()->addMenu(tr("&Help"));
+
+     QAction *aboutAct = helpMenu->addAction(this->style()->standardIcon(QStyle::SP_TitleBarMenuButton), tr("&About"), this, &MainWindow::about);
+     aboutAct->setStatusTip(tr("Show the application's About box"));
+
+     QAction *aboutLic = helpMenu->addAction(this->style()->standardIcon(QStyle::SP_TitleBarMenuButton), tr("&License"), this, &MainWindow::license);
+     aboutLic->setStatusTip(tr("Show the application's License Box"));
+
+     QAction *aboutQtAct = helpMenu->addAction(this->style()->standardIcon(QStyle::SP_TitleBarMenuButton), tr("About &Qt"), qApp, &QApplication::aboutQt);
+     aboutQtAct->setStatusTip(tr("Show the Qt library's About box"));
+
+}
+
+void MainWindow::license()
+{
+    QString   info;
+
+    QFile f ( ":/LICENSE.txt" );
+    f.open(QFile::ReadOnly | QFile::Text);
+    QTextStream ts(&f);
+    info = ts.readAll();
+    f.close();
+
+    QFont font("Courier New");
+    font.setStyleHint(QFont::Monospace);
+    font.setPixelSize(9);
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("License Informations"));
+    msgBox.setText(info);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setFont(font);
+
+    msgBox.exec();
+}
+
+void MainWindow::about()
+{
+    QSysInfo  systemInfo;
+    QString   info;
+
+    QStorageInfo storage = QStorageInfo::root();
+
+    info.append(tr("M3uMan V1.0\n"));
+    info.append("\n");
+    info.append(tr("Windows Version:\t%1\n").arg(systemInfo.windowsVersion()));
+    info.append(tr("Build Cpu Architecture:\t%1\n").arg(systemInfo.buildCpuArchitecture()));
+    info.append(tr("Current Cpu Architecture: %1\n").arg(systemInfo.currentCpuArchitecture()));
+    info.append(tr("Kernel Type:\t\t%1\n").arg(systemInfo.kernelType()));
+    info.append(tr("Kernel Version:\t\t%1\n").arg(systemInfo.kernelVersion()));
+    info.append(tr("Machine Host Name:\t%1\n").arg(systemInfo.machineHostName()));
+    info.append(tr("Product Type:\t\t%1\n").arg(systemInfo.productType()));
+    info.append(tr("Product Version:\t%1\n").arg(systemInfo.productVersion()));
+    info.append(tr("Byte Order:\t\t%1\n").arg(systemInfo.buildAbi()));
+    info.append(tr("Pretty ProductName:\t%1\n").arg(systemInfo.prettyProductName()));
+    info.append("\n");
+
+    QHostInfo hostInfo = QHostInfo::fromName( QHostInfo::localHostName() );
+
+    if (!hostInfo.addresses().isEmpty()) {
+        QHostAddress address = hostInfo.addresses().first();
+        info.append(tr("IP Address:\t\t%1\n").arg(address.toString()));
+    }
+
+    info.append("\n");
+
+    qDebug() << storage.rootPath();
+    if (storage.isReadOnly())
+        qDebug() << "isReadOnly:" << storage.isReadOnly();
+
+    info.append(tr("Storage Name:\t\t%1\n").arg(storage.displayName()));
+    info.append(tr("File System Type:\t%1\n").arg(QString::fromStdString(storage.fileSystemType().toStdString())));
+    info.append(tr("Size (GB):\t\t%1\n").arg(storage.bytesTotal()/1024/1024/1024));
+    info.append(tr("Free (GB):\t\t%1\n").arg(storage.bytesAvailable()/1024/1024/1024));
+
+    QFont font("Courier New");
+    font.setStyleHint(QFont::Monospace);
+    font.setPixelSize(9);
+
+    QMessageBox msgBox;
+    msgBox.setWindowTitle(tr("About Application"));
+    msgBox.setText(info);
+    msgBox.setStandardButtons(QMessageBox::Ok);
+    msgBox.setFont(font);
+
+    msgBox.exec();
+
 }

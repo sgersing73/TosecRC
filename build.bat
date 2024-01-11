@@ -1,13 +1,13 @@
 @echo off
 
-SET _ROOT=E:\PortableApps\CommonFiles\Qt\Qt5.12.3
+SET _ROOT=C:\Qt\
 
-SET QTDIR=%_ROOT%\5.12.3\mingw73_32
+SET QTDIR=%_ROOT%\5.12.7\mingw73_32
 SET PATH=%QTDIR%\bin;%_ROOT%\Tools\mingw730_32\bin;%_ROOT%\Tools\QtCreator\bin;C:\Windows\System32
 
 set clean=false
 set mode=release
-set dest=T:\Tosec
+set dest=C:\Tosec\TosecRC
 
 REM TortoiseProc.exe /command:update /path:"T:\Build" /closeonend:1
 

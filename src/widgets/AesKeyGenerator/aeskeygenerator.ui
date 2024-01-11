@@ -14,20 +14,7 @@
    <string>AES Key Generator</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="0" column="0">
-    <widget class="QTextEdit" name="textEdit">
-     <property name="font">
-      <font>
-       <family>Courier</family>
-       <pointsize>9</pointsize>
-      </font>
-     </property>
-     <property name="readOnly">
-      <bool>true</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
+   <item row="2" column="0">
     <layout class="QGridLayout" name="gridLayout">
      <item row="0" column="1">
       <widget class="QSpinBox" name="spinBox">
@@ -71,6 +58,32 @@
       </widget>
      </item>
     </layout>
+   </item>
+   <item row="0" column="0">
+    <widget class="QTextEdit" name="textEdit">
+     <property name="font">
+      <font>
+       <family>Courier</family>
+       <pointsize>9</pointsize>
+      </font>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label">
+     <property name="text">
+      <string>&lt;a href=&quot;https://www.aescrypt.com/download/&quot;&gt;Click Here to visit AES Crypt homepage!&lt;/a&gt;</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+     <property name="openExternalLinks">
+      <bool>true</bool>
+     </property>
+    </widget>
    </item>
   </layout>
  </widget>

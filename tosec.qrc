@@ -60,6 +60,7 @@
         <file>images/youtube/missing.png</file>
         <file>images/youtube/strip.gif</file>
         <file>images/Dropbox.png</file>
+        <file>images/Dropbox_Logo.svg</file>
     </qresource>
     <qresource prefix="/icon/toolbar/blue">
         <file>images/toolbar/blue/1471905738_Dropbox.ico</file>
@@ -97,5 +98,8 @@
         <file>images/farious/dir/mkdir.ico</file>
         <file>images/farious/dir/up.ico</file>
         <file>images/farious/dir/upload.ico</file>
+    </qresource>
+    <qresource prefix="/">
+        <file>LICENSE.txt</file>
     </qresource>
 </RCC>

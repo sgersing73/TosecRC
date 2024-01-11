@@ -5,6 +5,8 @@ DropboxBrowser::DropboxBrowser(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DropboxBrowser)
 {
+    QImage publisher;
+
     ui->setupUi(this);
 
     m_Dropbox2 = NULL;
@@ -52,8 +54,7 @@ DropboxBrowser::DropboxBrowser(QWidget *parent) :
 
     m_File.clear();
 
-    QString picfilename = ":/images/images/Dropbox.png";
-    QImage publisher;
+    QString picfilename = ":/images/images/Dropbox_Logo.svg";
 
     publisher.load( picfilename ) ;
 
@@ -174,8 +175,6 @@ void DropboxBrowser::on_treeView_clicked(const QModelIndex &index)
     // Get the full path of the item that's user clicked on
     m_Path = m_dirModel->fileInfo(index).absoluteFilePath();
     ui->listView->setRootIndex(m_fileModel->setRootPath(m_Path));
-
-    ui->treeView->resizeColumnToContents(0);
 }
 
 /**********************************************************************************************************************

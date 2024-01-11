@@ -17,14 +17,14 @@
    <item row="0" column="0">
     <widget class="QTreeView" name="treeView">
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
     </widget>
    </item>
    <item row="0" column="1">
     <widget class="QListView" name="listView">
      <property name="sizeAdjustPolicy">
-      <enum>QAbstractScrollArea::AdjustIgnored</enum>
+      <enum>QAbstractScrollArea::AdjustToContents</enum>
      </property>
     </widget>
    </item>
@@ -85,7 +85,7 @@
        <item>
         <widget class="QLabel" name="lblToken">
          <property name="text">
-          <string>Token</string>
+          <string>Token:</string>
          </property>
         </widget>
        </item>
@@ -134,7 +134,7 @@
      <item row="4" column="0">
       <widget class="QPushButton" name="cmdGetFiles">
        <property name="text">
-        <string>List Dropbox Files</string>
+        <string>Show files in your dropbox</string>
        </property>
       </widget>
      </item>

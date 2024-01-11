@@ -16,8 +16,8 @@ linux {
 }
 
 win32 {
-  release: DESTDIR = T:/TosecRC
-  debug:   DESTDIR = T:/TosecRC
+  release: DESTDIR = C:/Tosec/TosecRC
+  debug:   DESTDIR = C:/Tosec/TosecRC
 }
 
 OBJECTS_DIR = $$BUILDDIR/.obj
